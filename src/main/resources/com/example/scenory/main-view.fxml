@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.scenory.controller.MainController">
+
+    <!-- Top Menu Bar -->
+    <top>
+        <VBox>
+            <MenuBar>
+                <Menu text="File">
+                    <MenuItem text="New Project" onAction="#newProject" />
+                    <MenuItem text="Open Project" onAction="#openProject" />
+                    <MenuItem text="Save Project" onAction="#saveProject" />
+                    <SeparatorMenuItem />
+                    <MenuItem text="Exit" onAction="#exitApplication" />
+                </Menu>
+                <Menu text="Edit">
+                    <MenuItem text="Undo" onAction="#undo" />
+                    <MenuItem text="Redo" onAction="#redo" />
+                </Menu>
+                <Menu text="Tools">
+                    <MenuItem text="Pen" onAction="#selectPenTool" />
+                    <MenuItem text="Brush" onAction="#selectBrushTool" />
+                    <MenuItem text="Eraser" onAction="#selectEraserTool" />
+                </Menu>
+            </MenuBar>
+
+            <!-- Toolbar -->
+            <ToolBar>
+                <Button fx:id="newPanelBtn" text="New Panel" onAction="#createNewPanel" />
+                <Separator />
+                <ToggleButton fx:id="penBtn" text="Pen" onAction="#selectPenTool" />
+                <ToggleButton fx:id="brushBtn" text="Brush" onAction="#selectBrushTool" />
+                <ToggleButton fx:id="eraserBtn" text="Eraser" onAction="#selectEraserTool" />
+                <Separator />
+                <ColorPicker fx:id="colorPicker" onAction="#colorChanged" />
+                <Label text="Size:" />
+                <Slider fx:id="strokeSlider" min="1" max="20" value="2" />
+            </ToolBar>
+        </VBox>
+    </top>
+
+    <!-- Left Panel - Panel List -->
+    <left>
+        <VBox prefWidth="200" spacing="5">
+            <padding><Insets top="5" right="5" bottom="5" left="5" /></padding>
+            <Label text="Panels" style="-fx-font-weight: bold;" />
+            <ListView fx:id="panelListView" VBox.vgrow="ALWAYS" />
+        </VBox>
+    </left>
+
+    <!-- Center - Drawing Area -->
+    <center>
+        <ScrollPane fx:id="canvasScrollPane" fitToWidth="true" fitToHeight="true">
+            <AnchorPane fx:id="canvasContainer" />
+        </ScrollPane>
+    </center>
+
+    <!-- Bottom - Status Bar -->
+    <bottom>
+        <HBox spacing="10" style="-fx-padding: 5;">
+            <Label fx:id="statusLabel" text="Ready" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="canvasSizeLabel" text="Canvas: 800x600" />
+        </HBox>
+    </bottom>
+
+</BorderPane>
