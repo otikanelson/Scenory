@@ -4,69 +4,94 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+<BorderPane fx:id="mainBorderPane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.scenory.controller.MainController">
 
-    <!-- Top Menu Bar -->
+    <!-- Enhanced Menu Bar with Undo/Redo -->
     <top>
-        <VBox>
-            <MenuBar>
-                <Menu text="File">
-                    <MenuItem text="New Project" onAction="#newProject" />
-                    <MenuItem text="Open Project" onAction="#openProject" />
-                    <MenuItem text="Save Project" onAction="#saveProject" />
-                    <SeparatorMenuItem />
-                    <MenuItem text="Exit" onAction="#exitApplication" />
-                </Menu>
-                <Menu text="Edit">
-                    <MenuItem text="Undo" onAction="#undo" />
-                    <MenuItem text="Redo" onAction="#redo" />
-                </Menu>
-                <Menu text="Tools">
-                    <MenuItem text="Pen" onAction="#selectPenTool" />
-                    <MenuItem text="Brush" onAction="#selectBrushTool" />
-                    <MenuItem text="Eraser" onAction="#selectEraserTool" />
-                </Menu>
-            </MenuBar>
-
-            <!-- Toolbar -->
-            <ToolBar>
-                <Button fx:id="newPanelBtn" text="New Panel" onAction="#createNewPanel" />
-                <Separator />
-                <ToggleButton fx:id="penBtn" text="Pen" onAction="#selectPenTool" />
-                <ToggleButton fx:id="brushBtn" text="Brush" onAction="#selectBrushTool" />
-                <ToggleButton fx:id="eraserBtn" text="Eraser" onAction="#selectEraserTool" />
-                <Separator />
-                <ColorPicker fx:id="colorPicker" onAction="#colorChanged" />
-                <Label text="Size:" />
-                <Slider fx:id="strokeSlider" min="1" max="20" value="2" />
-            </ToolBar>
-        </VBox>
+        <MenuBar styleClass="clean-menu-bar">
+            <Menu text="File">
+                <MenuItem text="New Project" onAction="#newProject" accelerator="Ctrl+N" />
+                <MenuItem text="Open Project" onAction="#openProject" accelerator="Ctrl+O" />
+                <MenuItem text="Save Project" onAction="#saveProject" accelerator="Ctrl+S" />
+                <MenuItem text="Save As..." onAction="#saveProjectAs" />
+                <SeparatorMenuItem />
+                <MenuItem text="Export PDF" onAction="#exportPDF" />
+                <MenuItem text="Export Images" onAction="#exportImages" />
+                <SeparatorMenuItem />
+                <MenuItem text="Back to Welcome" onAction="#backToWelcome" />
+                <MenuItem text="Exit" onAction="#exitApplication" />
+            </Menu>
+            <Menu text="Edit">
+                <!-- Enhanced Undo/Redo with dynamic text -->
+                <MenuItem fx:id="undoMenuItem" text="Undo" onAction="#undo" accelerator="Ctrl+Z" />
+                <MenuItem fx:id="redoMenuItem" text="Redo" onAction="#redo" accelerator="Ctrl+Y" />
+                <SeparatorMenuItem />
+                <MenuItem text="Clear Canvas" onAction="#clearCanvas" />
+                <SeparatorMenuItem />
+                <MenuItem text="New Scene" onAction="#createNewScene" />
+                <MenuItem text="New Panel" onAction="#createNewPanel" accelerator="Ctrl+Enter" />
+                <MenuItem text="Duplicate Panel" onAction="#duplicatePanel" accelerator="Ctrl+D" />
+            </Menu>
+            <Menu text="Tools">
+                <MenuItem text="Pen Tool" onAction="#selectPenTool" accelerator="P" />
+                <MenuItem text="Brush Tool" onAction="#selectBrushTool" accelerator="B" />
+                <MenuItem text="Eraser Tool" onAction="#selectEraserTool" accelerator="E" />
+                <SeparatorMenuItem />
+                <MenuItem text="Rectangle Tool" onAction="#selectRectangleTool" accelerator="R" />
+                <MenuItem text="Circle Tool" onAction="#selectCircleTool" accelerator="C" />
+                <MenuItem text="Line Tool" onAction="#selectLineTool" accelerator="L" />
+                <SeparatorMenuItem />
+                <MenuItem text="Text Tool" onAction="#selectTextTool" accelerator="T" />
+            </Menu>
+            <Menu text="View">
+                <MenuItem text="Zoom In" onAction="#zoomIn" accelerator="Ctrl+Plus" />
+                <MenuItem text="Zoom Out" onAction="#zoomOut" accelerator="Ctrl+Minus" />
+                <MenuItem text="Fit to Window" onAction="#fitToWindow" />
+                <MenuItem text="Actual Size" onAction="#actualSize" accelerator="Ctrl+0" />
+                <SeparatorMenuItem />
+                <CheckMenuItem fx:id="showLeftPanelMenuItem" text="Show Left Panels" selected="true"
+                               onAction="#toggleLeftPanel" accelerator="F1" />
+                <CheckMenuItem fx:id="showRightPanelMenuItem" text="Show Scene Constructor" selected="true"
+                               onAction="#toggleRightPanel" />
+            </Menu>
+            <Menu text="Help">
+                <MenuItem text="Quick Start Guide" onAction="#showQuickStart" />
+                <MenuItem text="Keyboard Shortcuts" onAction="#showShortcuts" />
+                <MenuItem text="Debug Info" onAction="#showDebugInfo" />
+                <MenuItem text="About Scenory" onAction="#showAbout" />
+            </Menu>
+        </MenuBar>
     </top>
 
-    <!-- Left Panel - Panel List -->
-    <left>
-        <VBox prefWidth="200" spacing="5">
-            <padding><Insets top="5" right="5" bottom="5" left="5" /></padding>
-            <Label text="Panels" style="-fx-font-weight: bold;" />
-            <ListView fx:id="panelListView" VBox.vgrow="ALWAYS" />
-        </VBox>
-    </left>
-
-    <!-- Center - Drawing Area -->
+    <!-- Clean Canvas Area -->
     <center>
-        <ScrollPane fx:id="canvasScrollPane" fitToWidth="true" fitToHeight="true">
-            <AnchorPane fx:id="canvasContainer" />
-        </ScrollPane>
+        <VBox styleClass="clean-canvas-area">
+            <!-- Canvas Container with Centering -->
+            <ScrollPane fx:id="canvasScrollPane" fitToWidth="true" fitToHeight="true"
+                        VBox.vgrow="ALWAYS" styleClass="invisible-scroll-pane, canvas-container">
+                <StackPane fx:id="canvasStackPane" alignment="CENTER" styleClass="canvas-stack-pane">
+                    <AnchorPane fx:id="canvasContainer" styleClass="canvas-center-container" />
+                </StackPane>
+            </ScrollPane>
+        </VBox>
     </center>
 
-    <!-- Bottom - Status Bar -->
+    <!-- Enhanced Status Bar with Command Info -->
     <bottom>
-        <HBox spacing="10" style="-fx-padding: 5;">
-            <Label fx:id="statusLabel" text="Ready" />
+        <HBox spacing="8" styleClass="clean-status-bar">
+            <padding>
+                <Insets top="4" right="16" bottom="4" left="16" />
+            </padding>
+
+            <Label fx:id="statusLabel" text="✅ Ready to create amazing storyboards - Press Ctrl+Z/Y for undo/redo" />
             <Region HBox.hgrow="ALWAYS" />
-            <Label fx:id="canvasSizeLabel" text="Canvas: 800x600" />
+            <Label fx:id="canvasSizeLabel" text="📐 Canvas: 800x600" />
+            <Label fx:id="zoomLabel" text="🔍 100%" />
         </HBox>
     </bottom>
+
+    <!-- Left and Right panels will be dynamically set by MainController -->
+    <!-- CleanTabbedPanelGroup (left) and Enhanced CollapsibleSceneConstructor (right) -->
 
 </BorderPane>
