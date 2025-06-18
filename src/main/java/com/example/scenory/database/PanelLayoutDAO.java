@@ -1,48 +1,39 @@
 package com.example.scenory.database;
 
-import java.sql.*;
-import java.time.LocalDateTime;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
+/**
+ * Data Access Object for Panel Layout persistence
+ * Handles saving and loading UI panel states
+ */
 public class PanelLayoutDAO {
 
     /**
-     * Panel layout data class
+     * Panel Layout data structure
      */
     public static class PanelLayout {
-        private boolean leftPanelCollapsed;
-        private boolean toolPanelCollapsed;
-        private boolean fileStructureCollapsed;
-        private String sceneConstructorPosition; // "TOP", "RIGHT", "BOTTOM"
-        private boolean sceneConstructorVisible;
-        private double leftPanelWidth;
-        private double rightPanelWidth;
-
-        // Default Clip Studio layout
-        public PanelLayout() {
-            this.leftPanelCollapsed = false;
-            this.toolPanelCollapsed = true;  // Start collapsed (icons only)
-            this.fileStructureCollapsed = false;
-            this.sceneConstructorPosition = "RIGHT";
-            this.sceneConstructorVisible = true;
-            this.leftPanelWidth = 250.0;
-            this.rightPanelWidth = 300.0;
-        }
+        private boolean toolPanelCollapsed = false;
+        private boolean fileStructureCollapsed = false;
+        private boolean sceneConstructorVisible = true;
+        private String sceneConstructorPosition = "RIGHT";
+        private double leftPanelWidth = 250.0;
+        private double rightPanelWidth = 300.0;
 
         // Getters and setters
-        public boolean isLeftPanelCollapsed() { return leftPanelCollapsed; }
-        public void setLeftPanelCollapsed(boolean leftPanelCollapsed) { this.leftPanelCollapsed = leftPanelCollapsed; }
-
         public boolean isToolPanelCollapsed() { return toolPanelCollapsed; }
         public void setToolPanelCollapsed(boolean toolPanelCollapsed) { this.toolPanelCollapsed = toolPanelCollapsed; }
 
         public boolean isFileStructureCollapsed() { return fileStructureCollapsed; }
         public void setFileStructureCollapsed(boolean fileStructureCollapsed) { this.fileStructureCollapsed = fileStructureCollapsed; }
 
-        public String getSceneConstructorPosition() { return sceneConstructorPosition; }
-        public void setSceneConstructorPosition(String sceneConstructorPosition) { this.sceneConstructorPosition = sceneConstructorPosition; }
-
         public boolean isSceneConstructorVisible() { return sceneConstructorVisible; }
         public void setSceneConstructorVisible(boolean sceneConstructorVisible) { this.sceneConstructorVisible = sceneConstructorVisible; }
+
+        public String getSceneConstructorPosition() { return sceneConstructorPosition; }
+        public void setSceneConstructorPosition(String sceneConstructorPosition) { this.sceneConstructorPosition = sceneConstructorPosition; }
 
         public double getLeftPanelWidth() { return leftPanelWidth; }
         public void setLeftPanelWidth(double leftPanelWidth) { this.leftPanelWidth = leftPanelWidth; }
@@ -52,24 +43,27 @@ public class PanelLayoutDAO {
     }
 
     /**
-     * Save panel layout for a user
+     * Save panel layout to database
      */
     public static void saveLayout(String userId, String layoutName, PanelLayout layout) {
+        if (!DatabaseManager.getInstance().isDatabaseAvailable()) {
+            System.out.println("💾 Database not available, using in-memory panel layout");
+            return;
+        }
+
         String sql = """
-            INSERT INTO panel_layouts (user_id, layout_name, left_panel_collapsed, 
-                                     tool_panel_collapsed, file_structure_collapsed,
-                                     scene_constructor_position, scene_constructor_visible,
-                                     left_panel_width, right_panel_width, modified_date)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO panel_layouts (user_id, layout_name, tool_panel_collapsed, file_structure_collapsed,
+                                     scene_constructor_visible, scene_constructor_position, 
+                                     left_panel_width, right_panel_width)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             ON DUPLICATE KEY UPDATE
-                left_panel_collapsed = VALUES(left_panel_collapsed),
                 tool_panel_collapsed = VALUES(tool_panel_collapsed),
                 file_structure_collapsed = VALUES(file_structure_collapsed),
-                scene_constructor_position = VALUES(scene_constructor_position),
                 scene_constructor_visible = VALUES(scene_constructor_visible),
+                scene_constructor_position = VALUES(scene_constructor_position),
                 left_panel_width = VALUES(left_panel_width),
                 right_panel_width = VALUES(right_panel_width),
-                modified_date = VALUES(modified_date)
+                modified_date = CURRENT_TIMESTAMP
             """;
 
         try (Connection conn = DatabaseManager.getInstance().getConnection();
@@ -77,19 +71,15 @@ public class PanelLayoutDAO {
 
             stmt.setString(1, userId);
             stmt.setString(2, layoutName);
-            stmt.setBoolean(3, layout.isLeftPanelCollapsed());
-            stmt.setBoolean(4, layout.isToolPanelCollapsed());
-            stmt.setBoolean(5, layout.isFileStructureCollapsed());
+            stmt.setBoolean(3, layout.isToolPanelCollapsed());
+            stmt.setBoolean(4, layout.isFileStructureCollapsed());
+            stmt.setBoolean(5, layout.isSceneConstructorVisible());
             stmt.setString(6, layout.getSceneConstructorPosition());
-            stmt.setBoolean(7, layout.isSceneConstructorVisible());
-            stmt.setDouble(8, layout.getLeftPanelWidth());
-            stmt.setDouble(9, layout.getRightPanelWidth());
-            stmt.setTimestamp(10, Timestamp.valueOf(LocalDateTime.now()));
+            stmt.setDouble(7, layout.getLeftPanelWidth());
+            stmt.setDouble(8, layout.getRightPanelWidth());
 
-            int affectedRows = stmt.executeUpdate();
-            if (affectedRows > 0) {
-                System.out.println("✅ Panel layout saved for user: " + userId);
-            }
+            stmt.executeUpdate();
+            System.out.println("💾 Panel layout saved successfully");
 
         } catch (SQLException e) {
             System.err.println("❌ Error saving panel layout: " + e.getMessage());
@@ -98,13 +88,17 @@ public class PanelLayoutDAO {
     }
 
     /**
-     * Load panel layout for a user
+     * Load panel layout from database
      */
     public static PanelLayout loadLayout(String userId, String layoutName) {
+        if (!DatabaseManager.getInstance().isDatabaseAvailable()) {
+            System.out.println("📐 Using default panel layout for user: " + userId);
+            return createDefaultLayout();
+        }
+
         String sql = """
-            SELECT left_panel_collapsed, tool_panel_collapsed, file_structure_collapsed,
-                   scene_constructor_position, scene_constructor_visible,
-                   left_panel_width, right_panel_width
+            SELECT tool_panel_collapsed, file_structure_collapsed, scene_constructor_visible,
+                   scene_constructor_position, left_panel_width, right_panel_width
             FROM panel_layouts 
             WHERE user_id = ? AND layout_name = ?
             """;
@@ -118,33 +112,50 @@ public class PanelLayoutDAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     PanelLayout layout = new PanelLayout();
-                    layout.setLeftPanelCollapsed(rs.getBoolean("left_panel_collapsed"));
                     layout.setToolPanelCollapsed(rs.getBoolean("tool_panel_collapsed"));
                     layout.setFileStructureCollapsed(rs.getBoolean("file_structure_collapsed"));
-                    layout.setSceneConstructorPosition(rs.getString("scene_constructor_position"));
                     layout.setSceneConstructorVisible(rs.getBoolean("scene_constructor_visible"));
+                    layout.setSceneConstructorPosition(rs.getString("scene_constructor_position"));
                     layout.setLeftPanelWidth(rs.getDouble("left_panel_width"));
                     layout.setRightPanelWidth(rs.getDouble("right_panel_width"));
 
-                    System.out.println("📐 Loaded panel layout for user: " + userId);
+                    System.out.println("📐 Panel layout loaded from database");
                     return layout;
+                } else {
+                    System.out.println("📐 No saved layout found, using defaults");
+                    return createDefaultLayout();
                 }
             }
 
         } catch (SQLException e) {
             System.err.println("❌ Error loading panel layout: " + e.getMessage());
             e.printStackTrace();
+            return createDefaultLayout();
         }
-
-        // Return default layout if not found
-        System.out.println("📐 Using default panel layout for user: " + userId);
-        return new PanelLayout();
     }
 
     /**
-     * Delete a panel layout
+     * Create default panel layout
+     */
+    private static PanelLayout createDefaultLayout() {
+        PanelLayout layout = new PanelLayout();
+        layout.setToolPanelCollapsed(false);
+        layout.setFileStructureCollapsed(false);
+        layout.setSceneConstructorVisible(true);
+        layout.setSceneConstructorPosition("RIGHT");
+        layout.setLeftPanelWidth(250.0);
+        layout.setRightPanelWidth(300.0);
+        return layout;
+    }
+
+    /**
+     * Delete a specific layout
      */
     public static boolean deleteLayout(String userId, String layoutName) {
+        if (!DatabaseManager.getInstance().isDatabaseAvailable()) {
+            return false;
+        }
+
         String sql = "DELETE FROM panel_layouts WHERE user_id = ? AND layout_name = ?";
 
         try (Connection conn = DatabaseManager.getInstance().getConnection();
@@ -153,17 +164,12 @@ public class PanelLayoutDAO {
             stmt.setString(1, userId);
             stmt.setString(2, layoutName);
 
-            int affectedRows = stmt.executeUpdate();
-            if (affectedRows > 0) {
-                System.out.println("🗑️ Panel layout deleted for user: " + userId);
-                return true;
-            }
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
 
         } catch (SQLException e) {
             System.err.println("❌ Error deleting panel layout: " + e.getMessage());
-            e.printStackTrace();
+            return false;
         }
-
-        return false;
     }
 }

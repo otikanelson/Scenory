@@ -1,0 +1,50 @@
+/* ===== WELCOME SCREEN LAYOUT ===== */
+
+.welcome-screen {
+    -fx-background-color: #1a1a1a;  /* Dark gradient */
+}
+
+.main-content {
+    -fx-background-color: linear-gradient(to bottom, #01012e, #00010e);
+}
+
+.hero-section {
+    -fx-alignment: center;
+    -fx-padding: 60 40;
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-border-color: rgba(255, 255, 255, 0.25);
+    -fx-border-width: 1.5;
+    -fx-border-radius: 32;
+    -fx-background-radius: 32;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.1), 8, 0.7, 0, 0),
+                dropshadow(gaussian, rgba(0, 0, 0, 0.3), 16, 0.5, 0, 4),
+                dropshadow(gaussian, rgba(0, 0, 0, 0.6), 32, 0.3, 0, 12);
+    -fx-max-width: 800;
+}
+
+.hero-title {
+    -fx-font-family: 'Crapasimo', cursive;
+    -fx-font-size: 4em;
+    -fx-text-fill: #ffffff;
+    -fx-text-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(255,107,53,0.4), 12, 0, 0, 0);
+}
+
+.hero-subtitle {
+    -fx-font-family: 'Space Grotesk', 'Inter', sans-serif;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: 500;
+    -fx-text-fill: rgba(255, 255, 255, 0.9);
+    -fx-text-alignment: center;
+    -fx-max-width: 600;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 4, 0, 1, 1);
+}
+
+.project-template {
+    -fx-background-color: #2a2a2a;
+    -fx-border-color: #4a4a4a;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-padding: 32 24;
+    -fx-alignment: center;
+}

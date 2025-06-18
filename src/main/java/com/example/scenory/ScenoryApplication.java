@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,6 +17,19 @@ public class ScenoryApplication extends Application {
                 ScenoryApplication.class.getResource("welcome-view.fxml")
         );
         Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
+
+        // Load custom fonts
+        try {
+            Font.loadFont(getClass().getResourceAsStream("/com/example/scenory/fonts/Inter/static/Inter-Regular.ttf"), 14);
+            Font.loadFont(getClass().getResourceAsStream("/com/example/scenory/fonts/Inter/static/Inter-Bold.ttf"), 14);
+            Font.loadFont(getClass().getResourceAsStream("/com/example/scenory/fonts/Outfit/static/Outfit-Regular.ttf"), 14);
+            Font.loadFont(getClass().getResourceAsStream("/com/example/scenory/fonts/Outfit/static/Outfit-ExtraBold.ttf"), 14);
+            Font.loadFont(getClass().getResourceAsStream("/com/example/scenory/fonts/SpaceGrotesk/static/SpaceGrotesk-Regular.ttf"), 14);
+            Font.loadFont(getClass().getResourceAsStream("/com/example/scenory/fonts/JetBrainsMono/static/JetBrainsMono-Regular.ttf"), 14);
+            System.out.println("✅ Custom fonts loaded successfully");
+        } catch (Exception e) {
+            System.out.println("⚠️ Could not load custom fonts: " + e.getMessage());
+        }
 
         try {
             String cssFile = ScenoryApplication.class.getResource("styles.css").toExternalForm();

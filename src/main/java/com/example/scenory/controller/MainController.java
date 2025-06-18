@@ -7,6 +7,7 @@ import com.example.scenory.utils.ThumbnailGenerator;
 import com.example.scenory.utils.CanvasPersistence;
 import com.example.scenory.view.components.DrawingCanvas;
 import com.example.scenory.view.panels.*;
+import com.example.scenory.view.dialogs.RichTextModalController;
 import com.example.scenory.database.PanelLayoutDAO;
 import com.example.scenory.commands.*;
 import com.example.scenory.input.KeyboardShortcutManager;
@@ -16,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.canvas.GraphicsContext;
@@ -52,7 +54,7 @@ public class MainController implements Initializable {
     // =====================================
     // ENHANCED PANEL SYSTEM COMPONENTS - CORRECTED
     // =====================================
-    private EnhancedDualPanelGroup leftPanelGroup; // CORRECTED: Changed from CleanTabbedPanelGroup
+    private EnhancedDualPanelGroup leftPanelGroup;
     private ToolSelectionPanel toolSelectionPanel;
     private CollapsibleSceneConstructor rightSceneConstructor;
     private ResizablePanelSystem resizableSystem;
@@ -74,7 +76,7 @@ public class MainController implements Initializable {
     // APPLICATION STATE
     // =====================================
     private Project currentProject;
-    private Scene currentScene;
+    private com.example.scenory.model.Scene currentScene; // FIXED: Fully qualified name
     private Panel currentPanel;
     private DrawingCanvas drawingCanvas;
     private GraphicsContext gc;
@@ -93,7 +95,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("🚀 Initializing Enhanced MainController with Undo/Redo System...");
+        System.out.println("🚀 Initializing Enhanced MainController with Rich Text Editor...");
 
         initializeProject();
         initializeCommandSystem();
@@ -106,7 +108,7 @@ public class MainController implements Initializable {
         setupLayoutPersistence();
         setupKeyboardShortcuts();
 
-        System.out.println("✅ Enhanced MainController with Undo/Redo initialized successfully");
+        System.out.println("✅ Enhanced MainController with Rich Text Editor initialized successfully");
     }
 
     // =====================================
@@ -118,7 +120,7 @@ public class MainController implements Initializable {
         currentProject.setName("Untitled Project");
 
         // Create default scene
-        Scene defaultScene = new Scene();
+        com.example.scenory.model.Scene defaultScene = new com.example.scenory.model.Scene(); // FIXED
         defaultScene.setName("Scene 1");
         defaultScene.setSequenceOrder(0);
         currentProject.getScenes().add(defaultScene);
@@ -132,7 +134,7 @@ public class MainController implements Initializable {
 
         // Create command manager
         commandManager = new CommandManager();
-        commandManager.setMaxHistorySize(100); // Increase for complex drawings
+        commandManager.setMaxHistorySize(100);
         commandManager.setMergeConsecutiveStrokes(true);
 
         System.out.println("✅ Command system initialized");
@@ -148,7 +150,7 @@ public class MainController implements Initializable {
         // Create file structure content (using existing tree view)
         VBox fileStructureContent = createFileStructureContent();
 
-        // CORRECTED: Create EnhancedDualPanelGroup instead of CleanTabbedPanelGroup
+        // Create EnhancedDualPanelGroup
         leftPanelGroup = new EnhancedDualPanelGroup();
         leftPanelGroup.setToolsContent(toolSelectionPanel);
         leftPanelGroup.setStructureContent(fileStructureContent);
@@ -353,12 +355,12 @@ public class MainController implements Initializable {
             @Override public void togglePanels() { MainController.this.toggleLeftPanel(); }
             @Override public void toggleToolsPanel() {
                 if (leftPanelGroup != null) {
-                    leftPanelGroup.expandToolsTab(); // CORRECTED: Use expandToolsTab()
+                    leftPanelGroup.expandToolsTab();
                 }
             }
             @Override public void toggleStructurePanel() {
                 if (leftPanelGroup != null) {
-                    leftPanelGroup.expandStructureTab(); // CORRECTED: Use expandStructureTab()
+                    leftPanelGroup.expandStructureTab();
                 }
             }
 
@@ -369,7 +371,14 @@ public class MainController implements Initializable {
 
         shortcutManager.setupDefaultShortcuts(callbacks);
 
-        System.out.println("⌨️ Keyboard shortcuts initialized");
+        // Add rich text editor shortcut
+        shortcutManager.registerCtrlShortcut(KeyCode.E, () -> {
+            if (currentPanel != null) {
+                openRichTextEditor(currentPanel);
+            }
+        });
+
+        System.out.println("⌨️ Keyboard shortcuts initialized with Rich Text Editor (Ctrl+E)");
     }
 
     private void centerCanvas() {
@@ -398,6 +407,159 @@ public class MainController implements Initializable {
     }
 
     // =====================================
+    // RICH TEXT EDITOR INTEGRATION
+    // =====================================
+
+    /**
+     * Open rich text editor for a panel's description
+     */
+    /**
+     * FIXED: Open rich text editor for a panel's description
+     */
+    private void openRichTextEditor(Panel panel) {
+        try {
+            System.out.println("📝 Opening simplified rich text editor for: " + panel.getName());
+
+            // FIXED: Load the Rich Text Modal FXML with correct path
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/com/example/scenory/view/dialogs/RichTextModal.fxml"));
+            Parent richTextModal = loader.load();
+
+            // Get the controller
+            RichTextModalController controller = loader.getController();
+
+            // Create a new stage for the modal
+            Stage modalStage = new Stage();
+            modalStage.setTitle("Edit Panel Description - " + panel.getName());
+            modalStage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+            modalStage.initOwner(statusLabel.getScene().getWindow());
+
+            // Set up the scene - FIXED: Use javafx.scene.Scene
+            javafx.scene.Scene modalScene = new javafx.scene.Scene(richTextModal, 700, 500);
+
+            // Add CSS styling
+            try {
+                String cssFile = getClass().getResource("/com/example/scenory/styles.css").toExternalForm();
+                modalScene.getStylesheets().add(cssFile);
+            } catch (Exception e) {
+                System.out.println("⚠️ Could not load CSS for rich text modal");
+            }
+
+            modalStage.setScene(modalScene);
+            modalStage.setResizable(true);
+            modalStage.setMinWidth(600);
+            modalStage.setMinHeight(400);
+
+            // Center the modal
+            modalStage.centerOnScreen();
+
+            // Set up the controller with panel data and save callback
+            controller.openForPanel(panel, this::onRichTextSaved);
+
+            // Show the modal
+            modalStage.showAndWait();
+
+        } catch (IOException e) {
+            System.err.println("❌ Failed to open rich text editor: " + e.getMessage());
+            e.printStackTrace();
+
+            // FALLBACK: Show simple text input dialog
+            showSimpleTextInputFallback(panel);
+        } catch (Exception e) {
+            System.err.println("❌ Unexpected error opening rich text editor: " + e.getMessage());
+            e.printStackTrace();
+            showError("Rich Text Editor Error", "Failed to open the rich text editor: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Fallback simple text input when rich text modal fails
+     */
+    private void showSimpleTextInputFallback(Panel panel) {
+        // Create a custom dialog with TextArea instead of TextField
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle("Edit Panel Description");
+        dialog.setHeaderText("Edit description for: " + panel.getName());
+
+        // Set up dialog buttons
+        ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, cancelButtonType);
+
+        // Create TextArea for multiline input
+        TextArea textArea = new TextArea();
+        textArea.setText(panel.getDescriptionPlainText() != null ? panel.getDescriptionPlainText() : "");
+        textArea.setPromptText("Enter panel description here...");
+        textArea.setPrefRowCount(8);
+        textArea.setPrefColumnCount(50);
+        textArea.setWrapText(true);
+
+        // Style the TextArea
+        textArea.setStyle(
+                "-fx-font-family: 'Inter', 'Segoe UI', Arial, sans-serif; " +
+                        "-fx-font-size: 14px; " +
+                        "-fx-padding: 8px;"
+        );
+
+        // Create container
+        VBox container = new VBox(10);
+        container.getChildren().addAll(
+                new Label("Description:"),
+                textArea
+        );
+        container.setPrefWidth(500);
+
+        dialog.getDialogPane().setContent(container);
+
+        // Focus on text area
+        javafx.application.Platform.runLater(() -> textArea.requestFocus());
+
+        // Set result converter
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == saveButtonType) {
+                return textArea.getText();
+            }
+            return null;
+        });
+
+        // Show dialog and handle result
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresent(description -> {
+            panel.setDescriptionPlainText(description);
+            panel.setDescriptionRichText(description);
+            onRichTextSaved(description);
+            statusLabel.setText("✅ Panel description updated (fallback mode): " + panel.getName());
+        });
+    }
+    /**
+     * Callback when rich text is saved
+     */
+    private void onRichTextSaved(String richTextContent) {
+        System.out.println("💾 Rich text content saved: " + richTextContent.length() + " characters");
+
+        // Update UI to reflect changes
+        updateThumbnailGrid(); // This will show the rich text indicator (📝)
+        updateSceneInfo();
+
+        // Mark panel as modified
+        if (currentPanel != null) {
+            statusLabel.setText("✅ Panel description updated: " + currentPanel.getName());
+        }
+    }
+
+    /**
+     * Enhanced menu action for rich text editing
+     */
+    @FXML
+    private void editPanelDescription() {
+        if (currentPanel != null) {
+            openRichTextEditor(currentPanel);
+        } else {
+            statusLabel.setText("No panel selected");
+        }
+    }
+
+    // =====================================
     // ENHANCED UNDO/REDO METHODS
     // =====================================
 
@@ -422,7 +584,7 @@ public class MainController implements Initializable {
     }
 
     // =====================================
-    // TOOL INTEGRATION METHODS - CORRECTED
+    // TOOL INTEGRATION METHODS
     // =====================================
 
     private void setupToolIntegration() {
@@ -457,32 +619,64 @@ public class MainController implements Initializable {
     }
 
     // =====================================
-    // LAYOUT PERSISTENCE METHODS - CORRECTED
+    // LAYOUT PERSISTENCE METHODS
     // =====================================
 
     private void setupLayoutPersistence() {
-        // Load saved layout
-        currentLayout = PanelLayoutDAO.loadLayout("default", "default");
-        applyLayout(currentLayout);
+        // Load saved layout (with error handling)
+        try {
+            currentLayout = PanelLayoutDAO.loadLayout("default", "default");
+            applyLayout(currentLayout);
+        } catch (Exception e) {
+            System.err.println("❌ Error loading panel layout: " + e.getMessage());
+            currentLayout = createDefaultPanelLayout();
+            applyLayout(currentLayout);
+        }
 
-        // CORRECTED: Listen to the correct properties for EnhancedDualPanelGroup
+        // Listen to the correct properties for EnhancedDualPanelGroup (with error handling)
         if (leftPanelGroup != null) {
             leftPanelGroup.toolsExpandedProperty().addListener((obs, oldVal, newVal) -> {
-                saveCurrentLayout();
+                try {
+                    saveCurrentLayout();
+                } catch (Exception e) {
+                    System.err.println("❌ Error saving panel layout: " + e.getMessage());
+                }
             });
             leftPanelGroup.structureExpandedProperty().addListener((obs, oldVal, newVal) -> {
-                saveCurrentLayout();
+                try {
+                    saveCurrentLayout();
+                } catch (Exception e) {
+                    System.err.println("❌ Error saving panel layout: " + e.getMessage());
+                }
             });
         }
 
         if (rightSceneConstructor != null) {
             rightSceneConstructor.collapsedProperty().addListener((obs, oldVal, newVal) -> {
-                saveCurrentLayout();
+                try {
+                    saveCurrentLayout();
+                } catch (Exception e) {
+                    System.err.println("❌ Error saving panel layout: " + e.getMessage());
+                }
             });
         }
 
         System.out.println("💾 Layout persistence setup complete");
     }
+
+    private PanelLayoutDAO.PanelLayout createDefaultPanelLayout() {
+        // Create a default layout when database is not available
+        PanelLayoutDAO.PanelLayout layout = new PanelLayoutDAO.PanelLayout();
+        layout.setToolPanelCollapsed(false);
+        layout.setFileStructureCollapsed(false);
+        layout.setSceneConstructorVisible(true);
+        layout.setSceneConstructorPosition("RIGHT");
+        layout.setLeftPanelWidth(250.0);
+        layout.setRightPanelWidth(300.0);
+        return layout;
+    }
+
+
 
     private void applyLayout(PanelLayoutDAO.PanelLayout layout) {
         if (layout == null) return;
@@ -493,7 +687,7 @@ public class MainController implements Initializable {
                 rightSceneConstructor.setCollapsed(!layout.isSceneConstructorVisible());
             }
 
-            // CORRECTED: Apply dual panel state using correct methods
+            // Apply dual panel state using correct methods
             if (leftPanelGroup != null) {
                 if (!layout.isToolPanelCollapsed()) {
                     leftPanelGroup.expandToolsTab();
@@ -513,11 +707,11 @@ public class MainController implements Initializable {
 
     private void saveCurrentLayout() {
         if (currentLayout == null) {
-            currentLayout = new PanelLayoutDAO.PanelLayout();
+            currentLayout = createDefaultPanelLayout();
         }
 
         try {
-            // CORRECTED: Save dual panel state using correct properties
+            // Save dual panel state using correct properties
             if (leftPanelGroup != null) {
                 currentLayout.setToolPanelCollapsed(!leftPanelGroup.isToolsExpanded());
                 currentLayout.setFileStructureCollapsed(!leftPanelGroup.isStructureExpanded());
@@ -529,16 +723,18 @@ public class MainController implements Initializable {
                 currentLayout.setSceneConstructorPosition("RIGHT");
             }
 
-            // Save to database
+            // Save to database (with error handling)
             PanelLayoutDAO.saveLayout("default", "default", currentLayout);
 
         } catch (Exception e) {
             System.err.println("❌ Error saving layout: " + e.getMessage());
+            // Continue without saving - app should still work
         }
     }
 
+
     // =====================================
-    // ENHANCED PANEL TOGGLE METHODS - CORRECTED
+    // ENHANCED PANEL TOGGLE METHODS
     // =====================================
 
     @FXML
@@ -567,7 +763,6 @@ public class MainController implements Initializable {
         }
     }
 
-    // CORRECTED: Updated dual panel control methods
     public void showToolsPanel() {
         if (leftPanelGroup != null) {
             leftPanelGroup.expandToolsTab();
@@ -680,7 +875,7 @@ public class MainController implements Initializable {
                 currentScene = project.getScenes().get(0);
             } else {
                 // Create default scene if project has none
-                Scene defaultScene = new Scene();
+                com.example.scenory.model.Scene defaultScene = new com.example.scenory.model.Scene(); // FIXED
                 defaultScene.setName("Scene 1");
                 defaultScene.setSequenceOrder(0);
                 project.getScenes().add(defaultScene);
@@ -750,8 +945,8 @@ public class MainController implements Initializable {
 
                         if (newSelection != null) {
                             Object selectedItem = newSelection.getValue();
-                            if (selectedItem instanceof Scene) {
-                                handleSceneSelection((Scene) selectedItem);
+                            if (selectedItem instanceof com.example.scenory.model.Scene) { // FIXED
+                                handleSceneSelection((com.example.scenory.model.Scene) selectedItem);
                             } else if (selectedItem instanceof Panel) {
                                 handlePanelSelection((Panel) selectedItem);
                             }
@@ -776,7 +971,7 @@ public class MainController implements Initializable {
     // PANEL SWITCHING WITH COMMAND HISTORY
     // =====================================
 
-    private void handleSceneSelection(Scene scene) {
+    private void handleSceneSelection(com.example.scenory.model.Scene scene) { // FIXED
         if (scene == currentScene) return;
 
         saveCurrentPanelDrawing();
@@ -815,7 +1010,7 @@ public class MainController implements Initializable {
         currentPanel = panel;
 
         // Update scene if needed (panel might be from different scene)
-        Scene panelScene = findSceneContainingPanel(panel);
+        com.example.scenory.model.Scene panelScene = findSceneContainingPanel(panel); // FIXED
         if (panelScene != null && panelScene != currentScene) {
             currentScene = panelScene;
             refreshPanelList();
@@ -898,7 +1093,7 @@ public class MainController implements Initializable {
             TreeItem<Object> rootItem = new TreeItem<>(currentProject);
             rootItem.setExpanded(true);
 
-            for (Scene scene : currentProject.getScenes()) {
+            for (com.example.scenory.model.Scene scene : currentProject.getScenes()) { // FIXED
                 TreeItem<Object> sceneItem = new TreeItem<>(scene);
                 sceneItem.setExpanded(true);
 
@@ -960,7 +1155,7 @@ public class MainController implements Initializable {
     }
 
     private Button createLargeThumbnailButton(Panel panel) {
-        VBox thumbnailContainer = new VBox(6); // Increased spacing to fix overlap
+        VBox thumbnailContainer = new VBox(6);
         thumbnailContainer.getStyleClass().add("enhanced-thumbnail-container");
 
         // Thumbnail image
@@ -997,11 +1192,11 @@ public class MainController implements Initializable {
         Button thumbnailBtn = new Button();
         thumbnailBtn.setGraphic(thumbnailContainer);
         thumbnailBtn.getStyleClass().add("large-thumbnail-button");
-        thumbnailBtn.setPrefSize(240, 180); // Increased height to accommodate timing
+        thumbnailBtn.setPrefSize(240, 180);
         thumbnailBtn.setMaxSize(240, 180);
         thumbnailBtn.setMinSize(240, 180);
 
-        // Enhanced context menu
+        // Enhanced context menu with rich text editor
         ContextMenu contextMenu = createEnhancedPanelContextMenu(panel);
         thumbnailBtn.setContextMenu(contextMenu);
 
@@ -1028,7 +1223,7 @@ public class MainController implements Initializable {
                 if (thumbnail != null) {
                     ImageView imageView = new ImageView(thumbnail);
                     imageView.setFitWidth(220);
-                    imageView.setFitHeight(120); // Reduced to make room for timing
+                    imageView.setFitHeight(120);
                     imageView.setPreserveRatio(true);
                     return imageView;
                 }
@@ -1044,6 +1239,9 @@ public class MainController implements Initializable {
         return placeholder;
     }
 
+    /**
+     * Create enhanced panel context menu with rich text editor
+     */
     private ContextMenu createEnhancedPanelContextMenu(Panel panel) {
         ContextMenu contextMenu = new ContextMenu();
 
@@ -1052,13 +1250,10 @@ public class MainController implements Initializable {
         renameItem.setGraphic(new Label("✏️"));
         renameItem.setOnAction(e -> showRenamePanelDialog(panel));
 
-        // Edit Description (Rich Text)
+        // Edit Description (Rich Text) - NOW FUNCTIONAL!
         MenuItem editDescItem = new MenuItem("Edit Description");
         editDescItem.setGraphic(new Label("📝"));
-        editDescItem.setOnAction(e -> {
-            // TODO: Will implement rich text modal in next phase
-            showInfo("Rich Text Editor", "Rich text editor will be implemented in the next phase!");
-        });
+        editDescItem.setOnAction(e -> openRichTextEditor(panel));
 
         // Set Panel Timing
         MenuItem timingItem = new MenuItem("Set Timing");
@@ -1111,8 +1306,8 @@ public class MainController implements Initializable {
     // HELPER METHODS
     // =====================================
 
-    private Scene findSceneContainingPanel(Panel panel) {
-        for (Scene scene : currentProject.getScenes()) {
+    private com.example.scenory.model.Scene findSceneContainingPanel(Panel panel) { // FIXED
+        for (com.example.scenory.model.Scene scene : currentProject.getScenes()) {
             if (scene.getPanels().contains(panel)) {
                 return scene;
             }
@@ -1163,7 +1358,7 @@ public class MainController implements Initializable {
     private void createNewScene() {
         saveCurrentPanelDrawing();
 
-        Scene newScene = new Scene();
+        com.example.scenory.model.Scene newScene = new com.example.scenory.model.Scene(); // FIXED
         newScene.setName("Scene " + (currentProject.getScenes().size() + 1));
         newScene.setSequenceOrder(currentProject.getScenes().size());
 
@@ -1314,7 +1509,7 @@ public class MainController implements Initializable {
             Panel duplicatedPanel = originalPanel.createCopy();
 
             // Find the scene containing the original panel
-            Scene targetScene = findSceneContainingPanel(originalPanel);
+            com.example.scenory.model.Scene targetScene = findSceneContainingPanel(originalPanel); // FIXED
             if (targetScene == null) {
                 statusLabel.setText("Cannot find scene for panel");
                 return;
@@ -1369,7 +1564,7 @@ public class MainController implements Initializable {
         }
     }
 
-    private String generateUniquePanelName(Scene scene, String baseName) {
+    private String generateUniquePanelName(com.example.scenory.model.Scene scene, String baseName) { // FIXED
         String candidateName = baseName + " (Copy)";
         int counter = 1;
 
@@ -1381,7 +1576,7 @@ public class MainController implements Initializable {
         return candidateName;
     }
 
-    private boolean isPanelNameTaken(Scene scene, String name) {
+    private boolean isPanelNameTaken(com.example.scenory.model.Scene scene, String name) { // FIXED
         return scene.getPanels().stream()
                 .anyMatch(panel -> panel.getName().equals(name));
     }
@@ -1401,7 +1596,7 @@ public class MainController implements Initializable {
             deleteCurrentPanel();
         } else {
             // Delete specific panel
-            Scene scene = findSceneContainingPanel(panel);
+            com.example.scenory.model.Scene scene = findSceneContainingPanel(panel); // FIXED
             if (scene != null) {
                 scene.getPanels().remove(panel);
                 refreshSceneTree();
@@ -1534,7 +1729,7 @@ public class MainController implements Initializable {
     }
 
     // =====================================
-    // ZOOM MENU METHODS (updated with canvas integration)
+    // ZOOM MENU METHODS
     // =====================================
 
     @FXML
@@ -1613,7 +1808,7 @@ public class MainController implements Initializable {
         alert.setTitle("About Scenory");
         alert.setHeaderText("Scenory - Professional Storyboarding Tool");
         alert.setContentText("Version 1.0\n\n" +
-                "Enhanced with undo/redo system and keyboard shortcuts\n" +
+                "Enhanced with Rich Text Editor, undo/redo system and keyboard shortcuts\n" +
                 "Built with JavaFX");
         alert.showAndWait();
     }
@@ -1634,6 +1829,7 @@ public class MainController implements Initializable {
         System.out.println("Current Scene: " + (currentScene != null ? currentScene.getName() : "None"));
         System.out.println("Zoom Level: " + Math.round(zoomLevel * 100) + "%");
         System.out.println("Panel State: " + getCurrentPanelState());
+        System.out.println("Rich Text Enabled: true");
         System.out.println("========================\n");
     }
 

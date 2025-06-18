@@ -5,9 +5,10 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane fx:id="mainBorderPane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.scenory.controller.MainController">
+            fx:controller="com.example.scenory.controller.MainController" style="-fx-background-color: #0a0a0a;"
+            styleClass="main-border-pane">
 
-    <!-- Enhanced Menu Bar with Undo/Redo -->
+    <!-- Enhanced Menu Bar with Undo/Redo and Rich Text -->
     <top>
         <MenuBar styleClass="clean-menu-bar">
             <Menu text="File">
@@ -32,6 +33,9 @@
                 <MenuItem text="New Scene" onAction="#createNewScene" />
                 <MenuItem text="New Panel" onAction="#createNewPanel" accelerator="Ctrl+Enter" />
                 <MenuItem text="Duplicate Panel" onAction="#duplicatePanel" accelerator="Ctrl+D" />
+                <MenuItem text="Edit Panel Description" onAction="#editPanelDescription" accelerator="Ctrl+E" />
+                <!-- NEW: Rich Text Editor Menu Item -->
+                <MenuItem text="Edit Panel Description" onAction="#editPanelDescription" accelerator="Ctrl+E" />
             </Menu>
             <Menu text="Tools">
                 <MenuItem text="Pen Tool" onAction="#selectPenTool" accelerator="P" />
@@ -84,7 +88,7 @@
                 <Insets top="4" right="16" bottom="4" left="16" />
             </padding>
 
-            <Label fx:id="statusLabel" text="✅ Ready to create amazing storyboards - Press Ctrl+Z/Y for undo/redo" />
+            <Label fx:id="statusLabel" text="✅ Ready to create amazing storyboards - Press Ctrl+E to edit panel descriptions" />
             <Region HBox.hgrow="ALWAYS" />
             <Label fx:id="canvasSizeLabel" text="📐 Canvas: 800x600" />
             <Label fx:id="zoomLabel" text="🔍 100%" />
@@ -92,6 +96,6 @@
     </bottom>
 
     <!-- Left and Right panels will be dynamically set by MainController -->
-    <!-- CleanTabbedPanelGroup (left) and Enhanced CollapsibleSceneConstructor (right) -->
+    <!-- EnhancedDualPanelGroup (left) and Enhanced CollapsibleSceneConstructor (right) -->
 
 </BorderPane>

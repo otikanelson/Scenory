@@ -1,0 +1,28 @@
+/* ===== MAIN INTERFACE LAYOUT ===== */
+
+.main-border-pane {
+    -fx-background-color: #0a0a0a;
+}
+
+.canvas-container {
+    -fx-background-color: #0a0a0a;
+}
+
+.canvas-stack-pane {
+    -fx-background-color: #0a0a0a;
+}
+
+.invisible-scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.invisible-scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.invisible-scroll-pane .scroll-bar {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+}

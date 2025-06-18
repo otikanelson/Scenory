@@ -1,0 +1,55 @@
+/* ===== GLOBAL STYLES ===== */
+/* ===== GLOBAL STYLES ===== */
+/* ===== GLOBAL STYLES ===== */
+.root {
+    -fx-background-color: #0a0a0a;
+    -fx-font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #ffffff;
+}
+
+/* Hide ALL scrollbars */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-max-height: 0;
+    -fx-pref-height: 0;
+}
+
+.scroll-pane .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-max-width: 0;
+    -fx-pref-width: 0;
+}
+
+.scroll-pane .corner {
+    -fx-background-color: transparent;
+    -fx-opacity: 0;
+}
+
+/* Force dark backgrounds */
+.vbox, .hbox, .border-pane, .anchor-pane, .stack-pane {
+    -fx-background-color: transparent;
+}
+
+.label {
+    -fx-text-fill: #ffffff;
+    -fx-font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+
+.vbox {
+    -fx-spacing: 8px;
+}
+
+.hbox {
+    -fx-spacing: 8px;
+}
+

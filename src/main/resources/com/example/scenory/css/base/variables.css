@@ -1,0 +1,27 @@
+/* ===== SCENORY CSS VARIABLES ===== */
+:root {
+  /* Current Colors */
+  --primary-bg: #1a1a1a;
+  --secondary-bg: #2a2a2a;
+  --tertiary-bg: #3a3a3a;
+  --accent-orange: #bf5700;
+  --accent-orange-hover: #ff8f00;
+  --accent-pressed: #8c3f00;
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --border-color: #4a4a4a;
+  --border-hover: #555555;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* Radius */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+}

@@ -29,15 +29,24 @@ public class DatabaseManager {
             Properties props = loadDatabaseProperties();
 
             HikariConfig config = new HikariConfig();
-            config.setJdbcUrl(String.format("jdbc:mysql://%s:%s/%s?useSSL=false&serverTimezone=UTC",
+
+            // FIXED: Add SSL and public key retrieval parameters
+            String jdbcUrl = String.format("jdbc:mysql://%s:%s/%s?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC",
                     props.getProperty("db.host"),
                     props.getProperty("db.port"),
-                    props.getProperty("db.name")));
+                    props.getProperty("db.name"));
+
+            config.setJdbcUrl(jdbcUrl);
             config.setUsername(props.getProperty("db.username"));
             config.setPassword(props.getProperty("db.password"));
             config.setMaximumPoolSize(Integer.parseInt(props.getProperty("db.pool.maximum", "10")));
             config.setMinimumIdle(Integer.parseInt(props.getProperty("db.pool.minimum", "2")));
             config.setConnectionTimeout(Long.parseLong(props.getProperty("db.pool.timeout", "30000")));
+
+            // Additional MySQL-specific settings
+            config.addDataSourceProperty("cachePrepStmts", "true");
+            config.addDataSourceProperty("prepStmtCacheSize", "250");
+            config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
 
             this.dataSource = new HikariDataSource(config);
 
@@ -46,6 +55,7 @@ public class DatabaseManager {
         } catch (Exception e) {
             System.err.println("❌ Failed to initialize database: " + e.getMessage());
             e.printStackTrace();
+            // Don't throw exception - allow app to continue without database
         }
     }
 
@@ -127,5 +137,10 @@ public class DatabaseManager {
             System.err.println("Database connection test failed: " + e.getMessage());
             return false;
         }
+    }
+
+    // ADDED: Check if database is available
+    public boolean isDatabaseAvailable() {
+        return dataSource != null && testConnection();
     }
 }

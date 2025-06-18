@@ -6,7 +6,8 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.scenory.controller.WelcomeController"
-            styleClass="welcome-screen">
+            styleClass="welcome-screen"
+            style="-fx-background-color: #0a0a0a;">
 
     <!-- Header Section -->
     <top>
@@ -40,8 +41,8 @@
                 </padding>
 
                 <!-- Hero Section -->
-                <VBox alignment="CENTER" spacing="24" minHeight="400" minWidth="200"  styleClass="hero-section">
-                    <Label text="Welcome to Scenory" styleClass="hero-title" />
+                <VBox alignment="CENTER" spacing="24" styleClass="hero-section">
+                    <Label text="Welcome to Scenory" styleClass="space-hero-title" />
                     <Label text="Professional storyboarding for animators, filmmakers, and content creators"
                            styleClass="hero-subtitle" textAlignment="CENTER" wrapText="true" />
                 </VBox>
@@ -55,32 +56,32 @@
 
                         <HBox spacing="20" alignment="CENTER_LEFT">
                             <!-- YouTube Template -->
-                            <VBox spacing="12" styleClass="project-template" alignment="CENTER"
-                                  onMouseClicked="#createYouTubeProject">
+                            <VBox spacing="12" styleClass="project-template, glass-panel"
+                                  alignment="CENTER" onMouseClicked="#createYouTubeProject">
                                 <Label text="📺" styleClass="template-icon" />
-                                <Label text="YouTube Animation" styleClass="template-name" />
+                                <Label text="YouTube Animation" styleClass="template-name, creative-heading" />
                                 <Label text="16:9 aspect ratio" styleClass="template-description" />
-                                <Button text="Create" styleClass="template-button primary-button"
+                                <Button text="Create" styleClass=" glass-button"
                                         onAction="#createYouTubeProject" />
                             </VBox>
 
                             <!-- Film Template -->
-                            <VBox spacing="12" styleClass="project-template" alignment="CENTER"
-                                  onMouseClicked="#createFilmProject">
+                            <VBox spacing="12" styleClass="project-template, glass-panel, creative-heading"
+                                  alignment="CENTER" onMouseClicked="#createFilmProject">
                                 <Label text="🎭" styleClass="template-icon" />
                                 <Label text="Film Storyboard" styleClass="template-name" />
                                 <Label text="Cinema aspect ratio" styleClass="template-description" />
-                                <Button text="Create" styleClass="template-button primary-button"
+                                <Button text="Create" styleClass="glass-button"
                                         onAction="#createFilmProject" />
                             </VBox>
 
                             <!-- Custom Template -->
-                            <VBox spacing="12" styleClass="project-template" alignment="CENTER"
-                                  onMouseClicked="#createCustomProject">
+                            <VBox spacing="12" styleClass="project-template, glass-panel, creative-heading"
+                                  alignment="CENTER" onMouseClicked="#createCustomProject">
                                 <Label text="⚙️" styleClass="template-icon" />
                                 <Label text="Custom Project" styleClass="template-name" />
                                 <Label text="Your specifications" styleClass="template-description" />
-                                <Button text="Create" styleClass="template-button"
+                                <Button text="Create" styleClass="glass-button"
                                         onAction="#createCustomProject" />
                             </VBox>
                         </HBox>
@@ -106,11 +107,11 @@
                         <Label text="Quick Actions" styleClass="section-title" />
 
                         <HBox spacing="16">
-                            <Button text="Open Project" styleClass="action-button"
+                            <Button text="Open Project" styleClass="action-button, glass-button"
                                     onAction="#openExistingProject" />
-                            <Button text="View Tutorials" styleClass="action-button"
+                            <Button text="View Tutorials" styleClass="action-button, glass-button"
                                     onAction="#openTutorials" />
-                            <Button text="Tips and Tricks" styleClass="action-button"
+                            <Button text="Tips and Tricks" styleClass="action-button, glass-button"
                                     onAction="#openTips" />
                         </HBox>
                     </VBox>

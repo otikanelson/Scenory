@@ -1,0 +1,34 @@
+/* ===== LOCAL FONT LOADING ===== */
+
+/* Remove all Google Font imports and use local fonts */
+
+.display-heading {
+    -fx-font-family: 'Outfit', 'Arial Black', sans-serif;
+    -fx-font-size: 2.5em;
+    -fx-font-weight: 800;
+    -fx-letter-spacing: -0.02em;
+}
+
+.creative-heading {
+    -fx-font-family: 'Space Grotesk', 'Arial', sans-serif;
+    -fx-font-size: 1.8em;
+    -fx-font-weight: 600;
+    -fx-letter-spacing: -0.01em;
+}
+
+.tech-label {
+    -fx-font-family: 'JetBrains Mono', 'Consolas', monospace;
+    -fx-font-size: 0.9em;
+    -fx-font-weight: 500;
+    -fx-letter-spacing: 0.1em;
+}
+
+.space-hero-title {
+    -fx-font-family: 'Outfit', 'Arial Black', sans-serif;
+    -fx-font-size: 4em;
+    -fx-font-weight: 900;
+    -fx-text-fill: #ffffff;
+    -fx-text-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(255,107,53,0.4), 12, 0, 0, 0);
+    -fx-letter-spacing: -0.02em;
+}

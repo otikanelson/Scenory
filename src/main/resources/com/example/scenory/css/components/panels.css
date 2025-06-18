@@ -1,0 +1,291 @@
+/* ===== PANEL COMPONENTS ===== */
+
+.collapsible-panel {
+    -fx-background-color: #2a2a2a;
+    -fx-border-color: #4a4a4a;
+    -fx-border-width: 0 1 0 0;
+}
+
+.collapsible-panel-header {
+    -fx-background-color: #333333;
+    -fx-border-color: #4a4a4a;
+    -fx-border-width: 0 0 1 0;
+    -fx-alignment: center-left;
+}
+
+.panel-toggle-button {
+    -fx-background-color: #555555;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #666666;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.panel-toggle-button:hover {
+    -fx-background-color: #bf5700;
+    -fx-border-color: #ff8f00;
+}
+
+.enhanced-dual-panel-group {
+    -fx-background-color: rgba(26, 26, 26, 0.9);
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 0 1 0 0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0, 2, 0);
+}
+
+.dual-panel-tab {
+    -fx-background-color: rgba(58, 58, 58, 0.8);
+    -fx-text-fill: #ffffff;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-font-family: 'Space Grotesk', 'Inter', sans-serif;
+    -fx-font-weight: 600;
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+}
+
+.dual-panel-tab:hover {
+    -fx-background-color: rgba(74, 74, 74, 0.9);
+    -fx-border-color: rgba(255, 107, 53, 0.5);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.dual-panel-tab-active {
+    -fx-background-color: rgba(255, 107, 53, 0.8) !important;
+    -fx-border-color: #ff6b35 !important;
+    -fx-text-fill: #ffffff !important;
+    -fx-effect: dropshadow(gaussian, rgba(255, 107, 53, 0.4), 8, 0, 0, 2);
+}
+
+.enhanced-scene-constructor {
+    -fx-background-color: rgba(26, 26, 26, 0.9);
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 0 0 0 1;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0, -2, 0);
+}
+
+.enhanced-scene-constructor-header {
+    -fx-background-color: rgba(51, 51, 51, 0.9);
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 0 0 1 0;
+}
+
+.scene-constructor-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-family: 'Outfit', 'Inter', sans-serif;
+    -fx-font-weight: 700;
+    -fx-font-size: 14px;
+}
+
+/* ===== PANEL COMPONENTS ===== */
+
+.enhanced-dual-panel-group {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 0 1 0 0;
+}
+
+.dual-panel-icon-container {
+    -fx-background-color: #1a1a1a;
+    -fx-padding: 8;
+}
+
+.dual-panel-tab {
+    -fx-background-color: #3a3a3a;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-font-size: 12px;
+    -fx-font-weight: 500;
+    -fx-padding: 8 12;
+    -fx-cursor: hand;
+}
+
+.dual-panel-tab:hover {
+    -fx-background-color: #4a4a4a;
+    -fx-border-color: #ff6b35;
+}
+
+.dual-panel-tab-active {
+    -fx-background-color: #ff6b35 !important;
+    -fx-border-color: #ff8f00 !important;
+    -fx-text-fill: #ffffff !important;
+}
+
+.dual-panel-content {
+    -fx-background-color: #1a1a1a;
+    -fx-padding: 12;
+}
+
+.tool-selection-panel {
+    -fx-background-color: #1a1a1a;
+    -fx-padding: 12;
+}
+
+.file-structure-content {
+    -fx-background-color: #1a1a1a;
+    -fx-padding: 12;
+}
+
+.enhanced-scene-constructor {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 0 0 0 1;
+}
+
+.enhanced-scene-constructor-header {
+    -fx-background-color: #2a2a2a;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 12;
+}
+
+.scene-constructor-content {
+    -fx-background-color: #1a1a1a;
+    -fx-padding: 12;
+}
+
+/* Tree view styling */
+.tree-view {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: transparent;
+}
+
+.tree-view .tree-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 4 8;
+}
+
+.tree-view .tree-cell:selected {
+    -fx-background-color: #ff6b35;
+    -fx-text-fill: #ffffff;
+}
+
+/* Add to existing panels.css */
+
+.dual-panel-layout {
+    -fx-background-color: #1a1a1a;
+}
+
+.horizontal-dual-panel {
+    -fx-background-color: #1a1a1a;
+}
+
+.thumbnail-container {
+    -fx-background-color: #1a1a1a;
+}
+
+.scene-constructor-collapsed {
+    -fx-background-color: #1a1a1a;
+}
+
+/* Force all containers to be dark */
+.tools-container {
+    -fx-background-color: #1a1a1a;
+}
+
+.tool-options-container {
+    -fx-background-color: #1a1a1a;
+}
+
+.resizable-tree-view {
+    -fx-background-color: #1a1a1a;
+}
+/* Hide redundant headers in dual panel mode */
+.dual-panel-left-section .section-header,
+.dual-panel-right-section .section-header {
+    -fx-opacity: 0;
+    -fx-max-height: 0;
+    -fx-pref-height: 0;
+}
+
+/* Single header for dual panel */
+.dual-panel-compact-header {
+    -fx-background-color: #2a2a2a;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 8 12;
+    -fx-min-height: 28;
+    -fx-max-height: 28;
+}
+
+.dual-panel-compact-title {
+    -fx-text-fill: #ff6b35;
+    -fx-font-weight: 600;
+    -fx-font-size: 11px;
+}
+
+.dual-panel-close-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: #b0b0b0;
+    -fx-font-size: 12px;
+    -fx-cursor: hand;
+}
+
+.dual-panel-close-btn:hover {
+    -fx-text-fill: #ff6b35;
+}
+/* Consistent border for structure panel */
+.file-structure-content {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 12;
+}
+
+.section-header {
+    -fx-text-fill: #ff6b35;
+    -fx-font-weight: 600;
+    -fx-font-size: 12px;
+    -fx-padding: 4 0 8 0;
+}
+
+/* Single toggle button for scene constructor */
+.scene-constructor-toggle-button {
+    -fx-background-color: #3a3a3a;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-padding: 6 8;
+    -fx-cursor: hand;
+}
+
+.scene-constructor-toggle-button:hover {
+    -fx-background-color: #ff6b35;
+    -fx-border-color: #ff8f00;
+}
+
+/* Hide redundant collapsed toggle */
+.scene-constructor-collapsed-toggle {
+    -fx-opacity: 0;
+    -fx-max-width: 0;
+    -fx-pref-width: 0;
+}
+
+/* Clean up scene constructor header */
+.enhanced-scene-constructor-header {
+    -fx-background-color: #2a2a2a;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 8 12;
+    -fx-alignment: center-left;
+}
+
+.scene-constructor-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 600;
+    -fx-font-size: 13px;
+}
