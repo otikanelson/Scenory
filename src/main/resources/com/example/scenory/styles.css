@@ -1,0 +1,163 @@
+/* Base Styles */
+@import "css/base/fonts.css";
+@import "css/base/global.css";
+@import "css/themes/glassmorphism.css";
+
+/* Components */
+@import "css/components/buttons.css";
+@import "css/components/panels.css";
+@import "css/components/menus.css";
+@import "css/components/thumbnails.css";
+@import "css/components/canvas.css";
+@import "css/components/dialogs.css";
+
+/* Layout */
+@import "css/layout/welcome.css";
+@import "css/components/tools.css";
+@import "css/layout/main-interface.css";
+
+/* Add this to your existing styles.css file: */
+
+/* ===== SIMPLE SCENE CONSTRUCTOR STYLES ===== */
+
+.simple-scene-constructor {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 0 0 0 1;
+}
+
+.simple-scene-constructor-header {
+    -fx-background-color: #2a2a2a;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 8 12;
+    -fx-alignment: center-left;
+}
+
+.simple-scene-constructor-content {
+    -fx-background-color: #1a1a1a;
+    -fx-padding: 12;
+}
+
+/* Collapsed state styling - matches tool panel */
+.simple-collapsed-container {
+    -fx-background-color: #1a1a1a;
+    -fx-padding: 8 4;
+}
+
+.collapsed-scene-icon-button {
+    -fx-background-color: #3a3a3a;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-font-size: 16px;
+    -fx-font-weight: 500;
+    -fx-padding: 8;
+    -fx-cursor: hand;
+}
+
+.collapsed-scene-icon-button:hover {
+    -fx-background-color: #4a4a4a;
+    -fx-border-color: #ff6b35;
+}
+
+.collapsed-scene-icon-button:pressed {
+    -fx-background-color: #ff6b35;
+    -fx-border-color: #ff8f00;
+}
+
+/* Scene info styling */
+.scene-info-container {
+    -fx-spacing: 2;
+}
+
+.current-scene-label {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 600;
+    -fx-font-size: 12px;
+}
+
+.current-panel-label {
+    -fx-text-fill: #b0b0b0;
+    -fx-font-size: 11px;
+}
+
+.panel-count-label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12px;
+    -fx-font-weight: 500;
+}
+
+/* FIXED: Clean navigation styling (no dotted lines) */
+.clean-panel-navigation {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 6 8;
+}
+
+/* FIXED: Rich text display area */
+.rich-text-display-container {
+    -fx-background-color: rgba(255, 255, 255, 0.03);
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 8;
+}
+
+.rich-text-label {
+    -fx-text-fill: #ff6b35;
+    -fx-font-weight: 600;
+    -fx-font-size: 11px;
+}
+
+.rich-text-scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.rich-text-content {
+    -fx-text-fill: #e0e0e0;
+    -fx-font-size: 11px;
+    -fx-line-spacing: 2;
+    -fx-background-color: rgba(255, 255, 255, 0.02);
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+/* Scene constructor toggle button */
+.scene-constructor-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 600;
+    -fx-font-size: 13px;
+}
+
+.scene-constructor-toggle-button {
+    -fx-background-color: #3a3a3a;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
+    -fx-padding: 4 6;
+    -fx-cursor: hand;
+}
+
+.scene-constructor-toggle-button:hover {
+    -fx-background-color: #ff6b35;
+    -fx-border-color: #ff8f00;
+}
+
+/* Smooth transitions */
+.simple-scene-constructor {
+    -fx-transition: all 0.25s ease-in-out;
+}
+
+.collapsed-scene-icon-button {
+    -fx-transition: all 0.15s ease-in-out;
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.scenory.controller.ModalController"
+      styleClass="space-modal" spacing="0" maxWidth="500" maxHeight="400">
+
+    <!-- Header -->
+    <HBox styleClass="modal-header" alignment="CENTER_LEFT">
+        <Label fx:id="modalTitle" text="About Scenory" styleClass="modal-title" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="closeButton" text="✕" styleClass="modal-close-btn" onAction="#closeModal" />
+    </HBox>
+
+    <!-- Content -->
+    <VBox styleClass="modal-content" spacing="16" VBox.vgrow="ALWAYS">
+        <Label text="🎬 Scenory" styleClass="about-app-title" />
+        <Label text="Version 1.0.0" styleClass="about-version" />
+        <Label styleClass="modal-text" wrapText="true" text="Professional storyboarding application for animators, filmmakers, and content creators. Built with modern design principles and powerful creative tools." />
+
+        <VBox spacing="8">
+            <Label text="✨ Features:" styleClass="about-features-title" />
+            <Label text="• Advanced drawing tools with glassmorphism UI" styleClass="modal-text" />
+            <Label text="• Rich text panel descriptions" styleClass="modal-text" />
+            <Label text="• Professional project templates" styleClass="modal-text" />
+            <Label text="• Cinematic thumbnail previews" styleClass="modal-text" />
+            <Label text="• Smooth animations and modern interface" styleClass="modal-text" />
+        </VBox>
+
+        <Label text="Built with JavaFX • Designed for creative professionals" styleClass="about-footer" />
+    </VBox>
+
+    <!-- Footer -->
+    <HBox styleClass="modal-footer" alignment="CENTER_RIGHT" spacing="12">
+        <Button text="Visit Website" styleClass="modal-button secondary" />
+        <Button text="Close" styleClass="modal-button primary" onAction="#closeModal" />
+    </HBox>
+</VBox>

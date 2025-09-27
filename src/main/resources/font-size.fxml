@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+
+<fx:root xmlns:fx="http://javafx.com/fxml/1" type="java.util.List">
+    <String>8</String>
+    <String>9</String>
+    <String>10</String>
+    <String>11</String>
+    <String>12</String>
+    <String>14</String>
+    <String>16</String>
+    <String>18</String>
+    <String>20</String>
+    <String>24</String>
+    <String>28</String>
+    <String>32</String>
+    <String>36</String>
+    <String>48</String>
+    <String>72</String>
+</fx:root>

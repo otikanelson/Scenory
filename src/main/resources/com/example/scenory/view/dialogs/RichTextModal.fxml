@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.scenory.view.dialogs.RichTextModalController"
+            styleClass="rich-text-modal">
+
+    <!-- Header with Title and Close -->
+    <top>
+        <VBox styleClass="rich-text-header">
+            <HBox alignment="CENTER_LEFT" spacing="16" styleClass="header-container">
+                <padding>
+                    <Insets top="16" right="20" bottom="16" left="20" />
+                </padding>
+
+                <!-- Title and Panel Info -->
+                <VBox spacing="4">
+                    <Label fx:id="modalTitleLabel" text="Edit Panel Description" styleClass="modal-title" />
+                    <Label fx:id="panelNameLabel" text="Panel 1" styleClass="panel-name-subtitle" />
+                </VBox>
+
+                <!-- Spacer -->
+                <Region HBox.hgrow="ALWAYS" />
+
+                <!-- Character Count -->
+                <Label fx:id="characterCountLabel" text="0 characters" styleClass="character-count" />
+
+                <!-- Close Button -->
+                <Button fx:id="closeButton" text="×" styleClass="close-button" onAction="#closeModal" />
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- Main Content Area -->
+    <center>
+        <VBox styleClass="content-container" spacing="8">
+            <padding>
+                <Insets top="16" right="20" bottom="16" left="20" />
+            </padding>
+
+            <!-- Editor Header -->
+            <Label text="Panel Description" styleClass="pane-title" />
+
+            <!-- Text Area Editor -->
+            <TextArea fx:id="descriptionTextArea" styleClass="description-text-area"
+                      VBox.vgrow="ALWAYS" prefHeight="400" prefWidth="600"
+                      wrapText="true" />
+        </VBox>
+    </center>
+
+    <!-- Footer with Actions -->
+    <bottom>
+        <HBox spacing="12" alignment="CENTER_RIGHT" styleClass="footer-container">
+            <padding>
+                <Insets top="16" right="20" bottom="20" left="20" />
+            </padding>
+
+            <!-- Left Side - Quick Actions -->
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Button fx:id="insertTemplateButton" text="📋 Template" styleClass="secondary-button"
+                        onAction="#insertTemplate" />
+                <Button fx:id="clearAllButton" text="🗑 Clear All" styleClass="secondary-button"
+                        onAction="#clearAll" />
+            </HBox>
+
+            <!-- Spacer -->
+            <Region HBox.hgrow="ALWAYS" />
+
+            <!-- Right Side - Main Actions -->
+            <HBox spacing="12" alignment="CENTER_RIGHT">
+                <Button fx:id="cancelButton" text="Cancel" styleClass="cancel-button"
+                        onAction="#cancelEdit" />
+                <Button fx:id="saveButton" text="Save Description" styleClass="save-button, primary-button"
+                        onAction="#saveDescription" />
+            </HBox>
+        </HBox>
+    </bottom>
+
+</BorderPane>

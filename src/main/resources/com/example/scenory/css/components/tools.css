@@ -1,0 +1,73 @@
+/* ===== TOOL COMPONENTS ===== */
+
+.tool-selection-panel {
+    -fx-background-color: rgba(42, 42, 42, 0.9);
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0, 0, 2);
+}
+
+.tool-button {
+    -fx-background-color: rgba(74, 74, 74, 0.8);
+    -fx-text-fill: #ffffff;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-font-family: 'Space Grotesk', 'Inter', sans-serif;
+    -fx-font-weight: 500;
+    -fx-cursor: hand;
+}
+
+.tool-button:hover {
+    -fx-background-color: rgba(85, 85, 85, 0.9);
+    -fx-border-color: rgba(255, 107, 53, 0.5);
+}
+
+.tool-button:selected {
+    -fx-background-color: rgba(255, 107, 53, 0.8);
+    -fx-border-color: #ff6b35;
+    -fx-text-fill: #ffffff;
+}
+
+/* ===== TOOL COMPONENTS ===== */
+
+.tool-selection-panel {
+    -fx-background-color: #1a1a1a;
+    -fx-spacing: 8;
+    -fx-padding: 12;
+}
+
+.tool-section-header {
+    -fx-text-fill: #ff6b35;
+    -fx-font-weight: 600;
+    -fx-font-size: 12px;
+    -fx-padding: 4 0;
+}
+
+.tool-button {
+    -fx-background-color: #3a3a3a;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 8 12;
+    -fx-cursor: hand;
+    -fx-font-size: 11px;
+}
+
+.tool-button:hover {
+    -fx-background-color: #4a4a4a;
+    -fx-border-color: #ff6b35;
+}
+
+.tool-button:selected {
+    -fx-background-color: #ff6b35 !important;
+    -fx-border-color: #ff8f00 !important;
+}
+
+.tool-option-label {
+    -fx-text-fill: #b0b0b0;
+    -fx-font-size: 11px;
+    -fx-font-weight: 500;
+}

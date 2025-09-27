@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.scenory.controller.ModalController"
+      styleClass="space-modal" spacing="0" maxWidth="600" maxHeight="500">
+
+    <!-- Header -->
+    <HBox styleClass="modal-header" alignment="CENTER_LEFT">
+        <Label fx:id="modalTitle" text="⚙️ Settings" styleClass="modal-title" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="closeButton" text="✕" styleClass="modal-close-btn" onAction="#closeModal" />
+    </HBox>
+
+    <!-- Content -->
+    <ScrollPane styleClass="modal-scroll" VBox.vgrow="ALWAYS">
+        <VBox styleClass="modal-content" spacing="20">
+
+            <!-- Theme Settings -->
+            <VBox spacing="12" styleClass="settings-section">
+                <Label text="🎨 Appearance" styleClass="settings-section-title" />
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <Label text="Theme:" styleClass="modal-text" />
+                    <ComboBox value="Dark Space Theme" styleClass="settings-combo">
+                        <items>
+                            <String fx:value="Dark Space Theme" />
+                            <String fx:value="Classic Dark" />
+                            <String fx:value="High Contrast" />
+                        </items>
+                    </ComboBox>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <Label text="UI Scale:" styleClass="modal-text" />
+                    <Slider min="80" max="150" value="100" styleClass="settings-slider" />
+                    <Label text="100%" styleClass="modal-text" />
+                </HBox>
+            </VBox>
+
+            <!-- Canvas Settings -->
+            <VBox spacing="12" styleClass="settings-section">
+                <Label text="🖼️ Canvas" styleClass="settings-section-title" />
+                <CheckBox text="Auto-save canvas changes" styleClass="settings-checkbox" selected="true" />
+                <CheckBox text="Generate thumbnails automatically" styleClass="settings-checkbox" selected="true" />
+                <CheckBox text="Enable smooth canvas zoom" styleClass="settings-checkbox" selected="true" />
+            </VBox>
+
+            <!-- Performance Settings -->
+            <VBox spacing="12" styleClass="settings-section">
+                <Label text="⚡ Performance" styleClass="settings-section-title" />
+                <CheckBox text="Enable glassmorphism effects" styleClass="settings-checkbox" selected="true" />
+                <CheckBox text="Smooth animations" styleClass="settings-checkbox" selected="true" />
+                <CheckBox text="Hardware acceleration" styleClass="settings-checkbox" selected="true" />
+            </VBox>
+
+        </VBox>
+    </ScrollPane>
+
+    <!-- Footer -->
+    <HBox styleClass="modal-footer" alignment="CENTER_RIGHT" spacing="12">
+        <Button text="Reset Defaults" styleClass="modal-button secondary" />
+        <Button text="Apply" styleClass="modal-button primary" onAction="#closeModal" />
+    </HBox>
+</VBox>

@@ -1,0 +1,138 @@
+/* ===== MODAL DIALOGS ===== */
+
+.space-modal {
+    -fx-background-color: rgba(26, 26, 26, 0.95);
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 24, 0, 0, 8);
+}
+
+.modal-header {
+    -fx-background-color: rgba(255, 107, 53, 0.1);
+    -fx-border-color: rgba(255, 107, 53, 0.3);
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 20;
+    -fx-border-radius: 20 20 0 0;
+    -fx-background-radius: 20 20 0 0;
+}
+
+.modal-title {
+    -fx-font-family: 'Space Grotesk', sans-serif;
+    -fx-font-size: 1.8em;
+    -fx-font-weight: 700;
+    -fx-text-fill: #ff6b35;
+}
+
+.modal-close-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-radius: 6;
+    -fx-text-fill: #b0b0b0;
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+    -fx-padding: 4 8;
+    -fx-cursor: hand;
+}
+
+.modal-close-btn:hover {
+    -fx-background-color: rgba(255, 107, 53, 0.2);
+    -fx-text-fill: #ff6b35;
+}
+
+.modal-content {
+    -fx-background-color: transparent;
+    -fx-padding: 24;
+}
+
+.modal-text {
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-font-size: 1em;
+    -fx-text-fill: rgba(255, 255, 255, 0.9);
+    -fx-line-spacing: 4;
+}
+
+.modal-footer {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 1 0 0 0;
+    -fx-padding: 16 20;
+    -fx-border-radius: 0 0 20 20;
+    -fx-background-radius: 0 0 20 20;
+}
+
+.modal-button {
+    -fx-background-color: rgba(255, 107, 53, 0.2);
+    -fx-border-color: #ff6b35;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 600;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+
+.modal-button:hover {
+    -fx-background-color: rgba(255, 107, 53, 0.4);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.modal-button.secondary {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* About Modal Specific */
+.about-app-title {
+    -fx-font-size: 2em;
+    -fx-font-weight: 800;
+    -fx-text-fill: #ff6b35;
+}
+
+.about-version {
+    -fx-font-size: 1.1em;
+    -fx-text-fill: #b0b0b0;
+    -fx-font-family: 'JetBrains Mono', monospace;
+}
+
+.about-features-title {
+    -fx-font-size: 1.1em;
+    -fx-font-weight: 600;
+    -fx-text-fill: #ffffff;
+}
+
+.about-footer {
+    -fx-font-size: 0.9em;
+    -fx-text-fill: #888888;
+    -fx-font-style: italic;
+}
+
+/* Settings Modal Specific */
+.settings-section {
+    -fx-background-color: rgba(255, 255, 255, 0.03);
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-padding: 16;
+}
+
+.settings-section-title {
+    -fx-font-size: 1.2em;
+    -fx-font-weight: 600;
+    -fx-text-fill: #ff6b35;
+}
+
+.settings-combo {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-text-fill: #ffffff;
+}
+
+.settings-checkbox {
+    -fx-text-fill: rgba(255, 255, 255, 0.9);
+}
+
+.settings-slider {
+    -fx-pref-width: 120;
+}

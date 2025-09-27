@@ -1,0 +1,23 @@
+/* ===== CANVAS COMPONENTS ===== */
+
+.clean-canvas-area {
+    -fx-background-color: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
+    -fx-min-width: 400;
+}
+
+.canvas-stack-pane {
+    -fx-background-color: linear-gradient(to bottom, #272757, #1a1a1a);
+    -fx-alignment: center;
+}
+
+.clean-status-bar {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 1 0 0 0;
+}
+
+.clean-status-bar .label {
+    -fx-text-fill: #b0b0b0;
+    -fx-font-family: 'JetBrains Mono', monospace;
+    -fx-font-size: 10px;
+}
