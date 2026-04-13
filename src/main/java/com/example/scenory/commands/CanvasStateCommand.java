@@ -45,8 +45,10 @@ public class CanvasStateCommand implements DrawingCommand {
 
     private void restoreCanvasState(WritableImage state) {
         if (state != null && canvas != null) {
-            canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-            canvas.getGraphicsContext2D().drawImage(state, 0, 0);
+            var gc = canvas.getGraphicsContext2D();
+            gc.setFill(canvas.getBackgroundColor());
+            gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+            gc.drawImage(state, 0, 0);
         }
     }
 

@@ -1,50 +1,331 @@
-/* ===== WELCOME SCREEN LAYOUT ===== */
+/* ===== MODERN WELCOME SCREEN - BLUE & ORANGE AESTHETIC ===== */
 
 .welcome-screen {
-    -fx-background-color: #1a1a1a;  /* Dark gradient */
+    -fx-background-color: #0a1128;
+    -fx-background-image: url('https://images.unsplash.com/photo-1557683316-973673baf926?w=1920&q=80');
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+/* Overlay to darken background */
+.welcome-screen::before {
+    -fx-background-color: rgba(10, 17, 40, 0.85);
+}
+
+.main-scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.main-scroll-pane > .viewport {
+    -fx-background-color: transparent;
 }
 
 .main-content {
-    -fx-background-color: linear-gradient(to bottom, #01012e, #00010e);
+    -fx-background-color: rgba(10, 17, 40, 0.75);
+    -fx-backdrop-filter: blur(10px);
 }
 
+/* ===== HEADER SECTION ===== */
+.welcome-header {
+    -fx-background-color: rgba(13, 27, 62, 0.85);
+    -fx-backdrop-filter: blur(20px);
+    -fx-border-color: rgba(255, 138, 0, 0.2);
+    -fx-border-width: 0 0 2 0;
+}
+
+.header-nav {
+    -fx-padding: 20 40;
+}
+
+.logo-icon {
+    -fx-font-size: 32px;
+    -fx-effect: dropshadow(gaussian, rgba(255, 138, 0, 0.8), 15, 0.6, 0, 0);
+}
+
+.logo-text {
+    -fx-font-family: 'Space Grotesk', 'Inter', sans-serif;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(to right, #ff8a00, #ffa500);
+    -fx-effect: dropshadow(gaussian, rgba(255, 138, 0, 0.6), 10, 0.5, 0, 0);
+}
+
+.header-button {
+    -fx-background-color: rgba(30, 144, 255, 0.2);
+    -fx-text-fill: #87ceeb;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-padding: 10 24;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: rgba(30, 144, 255, 0.4);
+    -fx-border-width: 1.5;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(30, 144, 255, 0.3), 8, 0.3, 0, 2);
+}
+
+.header-button:hover {
+    -fx-background-color: rgba(30, 144, 255, 0.35);
+    -fx-text-fill: #ffffff;
+    -fx-border-color: rgba(30, 144, 255, 0.7);
+    -fx-effect: dropshadow(gaussian, rgba(30, 144, 255, 0.6), 15, 0.5, 0, 0);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* ===== HERO SECTION ===== */
 .hero-section {
     -fx-alignment: center;
-    -fx-padding: 60 40;
-    -fx-background-color: rgba(255, 255, 255, 0.08);
-    -fx-border-color: rgba(255, 255, 255, 0.25);
-    -fx-border-width: 1.5;
-    -fx-border-radius: 32;
-    -fx-background-radius: 32;
-    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.1), 8, 0.7, 0, 0),
-                dropshadow(gaussian, rgba(0, 0, 0, 0.3), 16, 0.5, 0, 4),
-                dropshadow(gaussian, rgba(0, 0, 0, 0.6), 32, 0.3, 0, 12);
-    -fx-max-width: 800;
+    -fx-padding: 80 60;
+    -fx-background-color: rgba(13, 27, 62, 0.7);
+    -fx-border-color: linear-gradient(135deg, rgba(30, 144, 255, 0.4), rgba(255, 138, 0, 0.4));
+    -fx-border-width: 2;
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 40, 0.5, 0, 15),
+                dropshadow(gaussian, rgba(30, 144, 255, 0.3), 25, 0.4, 0, 0),
+                innershadow(gaussian, rgba(255, 138, 0, 0.15), 30, 0.3, 0, 5);
+    -fx-max-width: 900;
 }
 
-.hero-title {
-    -fx-font-family: 'Crapasimo', cursive;
-    -fx-font-size: 4em;
-    -fx-text-fill: #ffffff;
+.space-hero-title {
+    -fx-font-family: 'Space Grotesk', 'Outfit', sans-serif;
+    -fx-font-size: 68px;
+    -fx-font-weight: bold;
+    -fx-fill: linear-gradient(to right, #1e90ff 0%, #87ceeb 50%, #ff8a00 100%);
+    -fx-text-fill: linear-gradient(to right, #1e90ff 0%, #87ceeb 50%, #ff8a00 100%);
     -fx-text-alignment: center;
-    -fx-effect: dropshadow(gaussian, rgba(255,107,53,0.4), 12, 0, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(30, 144, 255, 0.8), 20, 0.7, 0, 0),
+                dropshadow(gaussian, rgba(255, 138, 0, 0.6), 25, 0.5, 0, 5);
 }
 
 .hero-subtitle {
-    -fx-font-family: 'Space Grotesk', 'Inter', sans-serif;
-    -fx-font-size: 1.2em;
-    -fx-font-weight: 500;
-    -fx-text-fill: rgba(255, 255, 255, 0.9);
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-font-size: 18px;
+    -fx-font-weight: 400;
+    -fx-text-fill: rgba(135, 206, 235, 0.95);
     -fx-text-alignment: center;
-    -fx-max-width: 600;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 4, 0, 1, 1);
+    -fx-max-width: 700;
+    -fx-line-spacing: 4px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 5, 0.5, 0, 2);
 }
 
+/* ===== SECTION TITLES ===== */
+.section-title {
+    -fx-font-family: 'Space Grotesk', 'Outfit', sans-serif;
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #87ceeb;
+    -fx-effect: dropshadow(gaussian, rgba(30, 144, 255, 0.5), 8, 0.5, 0, 2);
+}
+
+/* ===== PROJECT TEMPLATES ===== */
 .project-template {
-    -fx-background-color: #2a2a2a;
-    -fx-border-color: #4a4a4a;
-    -fx-border-radius: 12;
-    -fx-background-radius: 12;
-    -fx-padding: 32 24;
+    -fx-background-color: linear-gradient(135deg, rgba(13, 27, 62, 0.85) 0%, rgba(20, 40, 90, 0.75) 100%);
+    -fx-border-color: rgba(30, 144, 255, 0.4);
+    -fx-border-radius: 24;
+    -fx-background-radius: 24;
+    -fx-border-width: 2;
+    -fx-padding: 40 32;
     -fx-alignment: center;
+    -fx-min-width: 240;
+    -fx-min-height: 300;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 20, 0.4, 0, 8),
+                innershadow(gaussian, rgba(30, 144, 255, 0.1), 15, 0.3, 0, 2);
+}
+
+.project-template:hover {
+    -fx-background-color: linear-gradient(135deg, rgba(30, 144, 255, 0.25) 0%, rgba(255, 138, 0, 0.15) 100%);
+    -fx-border-color: linear-gradient(135deg, rgba(30, 144, 255, 0.8), rgba(255, 138, 0, 0.8));
+    -fx-border-width: 2.5;
+    -fx-scale-x: 1.08;
+    -fx-scale-y: 1.08;
+    -fx-effect: dropshadow(gaussian, rgba(30, 144, 255, 0.7), 30, 0.6, 0, 10),
+                dropshadow(gaussian, rgba(255, 138, 0, 0.5), 35, 0.5, 0, 12),
+                innershadow(gaussian, rgba(30, 144, 255, 0.3), 20, 0.4, 0, 0);
+}
+
+.template-icon {
+    -fx-font-size: 64px;
+    -fx-effect: dropshadow(gaussian, rgba(255, 138, 0, 0.8), 15, 0.6, 0, 0),
+                dropshadow(gaussian, rgba(30, 144, 255, 0.5), 20, 0.5, 0, 5);
+}
+
+.template-name {
+    -fx-font-family: 'Space Grotesk', 'Outfit', sans-serif;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-text-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(30, 144, 255, 0.4), 5, 0.5, 0, 2);
+}
+
+.template-description {
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: rgba(135, 206, 235, 0.8);
+    -fx-text-alignment: center;
+}
+
+/* ===== GLASS BUTTON (Orange CTA) ===== */
+.glass-button {
+    -fx-background-color: linear-gradient(135deg, #ff8a00 0%, #ffa500 100%);
+    -fx-text-fill: white;
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-font-size: 15px;
+    -fx-font-weight: 700;
+    -fx-padding: 14 36;
+    -fx-background-radius: 28;
+    -fx-border-radius: 28;
+    -fx-border-color: rgba(255, 165, 0, 0.5);
+    -fx-border-width: 1.5;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(255, 138, 0, 0.7), 18, 0.6, 0, 5),
+                innershadow(gaussian, rgba(255, 255, 255, 0.2), 10, 0.3, 0, 1);
+}
+
+.glass-button:hover {
+    -fx-background-color: linear-gradient(135deg, #ffa500 0%, #ffb733 100%);
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-effect: dropshadow(gaussian, rgba(255, 138, 0, 1), 25, 0.8, 0, 8),
+                dropshadow(gaussian, rgba(30, 144, 255, 0.4), 30, 0.5, 0, 10);
+}
+
+.glass-button:pressed {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* ===== ACTION BUTTONS (Blue) ===== */
+.action-button {
+    -fx-background-color: rgba(30, 144, 255, 0.15);
+    -fx-text-fill: #87ceeb;
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+    -fx-padding: 16 32;
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+    -fx-border-color: rgba(30, 144, 255, 0.35);
+    -fx-border-width: 1.5;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(30, 144, 255, 0.3), 10, 0.4, 0, 4);
+}
+
+.action-button:hover {
+    -fx-background-color: rgba(30, 144, 255, 0.3);
+    -fx-text-fill: #ffffff;
+    -fx-border-color: rgba(30, 144, 255, 0.7);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(gaussian, rgba(30, 144, 255, 0.6), 18, 0.6, 0, 6);
+}
+
+.browse-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ff8a00;
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+    -fx-padding: 10 20;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: rgba(255, 138, 0, 0.6);
+    -fx-border-width: 2;
+    -fx-cursor: hand;
+}
+
+.browse-button:hover {
+    -fx-background-color: rgba(255, 138, 0, 0.15);
+    -fx-text-fill: #ffa500;
+    -fx-border-color: rgba(255, 138, 0, 1);
+    -fx-effect: dropshadow(gaussian, rgba(255, 138, 0, 0.5), 12, 0.5, 0, 0);
+}
+
+/* ===== RECENT PROJECTS ===== */
+.recent-projects-list {
+    -fx-background-color: rgba(13, 27, 62, 0.6);
+    -fx-border-color: rgba(30, 144, 255, 0.3);
+    -fx-border-radius: 18;
+    -fx-background-radius: 18;
+    -fx-border-width: 1.5;
+    -fx-padding: 24;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 15, 0.4, 0, 6),
+                innershadow(gaussian, rgba(30, 144, 255, 0.1), 10, 0.3, 0, 2);
+}
+
+.empty-state-text {
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-font-size: 15px;
+    -fx-text-fill: rgba(135, 206, 235, 0.6);
+    -fx-padding: 24;
+    -fx-text-alignment: center;
+}
+
+/* ===== FOOTER ===== */
+.welcome-footer {
+    -fx-background-color: rgba(13, 27, 62, 0.9);
+    -fx-border-color: rgba(30, 144, 255, 0.3);
+    -fx-border-width: 2 0 0 0;
+    -fx-padding: 18 40;
+}
+
+.footer-text {
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-font-size: 13px;
+    -fx-text-fill: rgba(135, 206, 235, 0.7);
+}
+
+.footer-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: rgba(135, 206, 235, 0.8);
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-padding: 8 18;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.footer-button:hover {
+    -fx-background-color: rgba(30, 144, 255, 0.2);
+    -fx-text-fill: #ffffff;
+    -fx-border-color: rgba(30, 144, 255, 0.4);
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+}
+
+/* ===== SMOOTH TRANSITIONS ===== */
+.project-template,
+.glass-button,
+.action-button,
+.header-button,
+.browse-button,
+.footer-button {
+    -fx-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== SCROLLBAR STYLING ===== */
+.main-scroll-pane > .scroll-bar:vertical {
+    -fx-background-color: rgba(13, 27, 62, 0.5);
+    -fx-pref-width: 10px;
+}
+
+.main-scroll-pane > .scroll-bar:vertical > .thumb {
+    -fx-background-color: rgba(30, 144, 255, 0.5);
+    -fx-background-radius: 5px;
+}
+
+.main-scroll-pane > .scroll-bar:vertical > .thumb:hover {
+    -fx-background-color: rgba(30, 144, 255, 0.8);
+}
+
+.main-scroll-pane > .scroll-bar:vertical > .increment-button,
+.main-scroll-pane > .scroll-bar:vertical > .decrement-button {
+    -fx-background-color: transparent;
+    -fx-pref-height: 0;
 }

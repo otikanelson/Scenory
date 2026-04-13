@@ -51,9 +51,9 @@ public class ScenoryApplication extends Application {
         }
 
         stage.setScene(scene);
-        stage.setMinWidth(900);
-        stage.setMinHeight(700);
-        stage.centerOnScreen();
+        stage.setMinWidth(1000);
+        stage.setMinHeight(750);
+        stage.setMaximized(true);  // Start maximized to prevent cut-off
         stage.show();
 
         System.out.println("🚀 Scenory application started - Welcome screen displayed");

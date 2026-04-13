@@ -80,8 +80,10 @@ public class ShapeCommand implements DrawingCommand {
     @Override
     public void undo() {
         if (beforeState != null) {
-            canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-            canvas.getGraphicsContext2D().drawImage(beforeState, 0, 0);
+            var gc = canvas.getGraphicsContext2D();
+            gc.setFill(canvas.getBackgroundColor());
+            gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+            gc.drawImage(beforeState, 0, 0);
         }
     }
 
