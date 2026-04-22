@@ -261,6 +261,15 @@ public class MainController implements Initializable {
         // Restore saved panel sizes
         resizableSystem.restorePanelSizes();
 
+        // Finalize layout after scene is loaded
+        mainBorderPane.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                javafx.application.Platform.runLater(() -> {
+                    resizableSystem.finalizeLayout();
+                });
+            }
+        });
+
         System.out.println("🔄 Main layout replaced with enhanced panel system");
     }
 

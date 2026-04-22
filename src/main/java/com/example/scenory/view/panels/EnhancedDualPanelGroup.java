@@ -56,57 +56,51 @@ public class EnhancedDualPanelGroup extends VBox {
     }
 
     private void createIconTabs() {
-        iconContainer = new VBox(6); // Slightly more spacing
-        iconContainer.setAlignment(Pos.TOP_LEFT);
-        iconContainer.setPadding(new Insets(12, 6, 12, 6));
+        iconContainer = new VBox(6); // Vertical column with spacing
+        iconContainer.setAlignment(Pos.TOP_CENTER);
+        iconContainer.setPadding(new Insets(8, 6, 8, 6));
         iconContainer.getStyleClass().add("dual-panel-icon-container");
+        iconContainer.setStyle("-fx-background-color: rgba(20, 20, 20, 0.95);");
 
-        // Tools tab with icon and optional label
+        // Tools tab with icon only
         toolsTab = createTabButton("🛠️", "Drawing Tools", "Tools");
         toolsTab.setOnAction(e -> handleTabClick(toolsTab, "Tools"));
 
-        // Structure tab with icon and optional label
+        // Structure tab with icon only
         structureTab = createTabButton("📁", "Project Structure", "Structure");
         structureTab.setOnAction(e -> handleTabClick(structureTab, "Structure"));
 
         iconContainer.getChildren().addAll(toolsTab, structureTab);
         this.getChildren().add(iconContainer);
+        
+        System.out.println("🔧 DEBUG: Icon tabs created - Tools button text: '" + toolsTab.getText() + "', width: " + toolsTab.getPrefWidth());
     }
 
     private Button createTabButton(String icon, String fullText, String shortText) {
         Button button = new Button();
         button.getStyleClass().add("dual-panel-tab");
-        button.setPrefHeight(40);
-        button.setMinHeight(40);
-        button.setMaxHeight(40);
-        button.setAlignment(Pos.CENTER_LEFT);
-        button.setPadding(new Insets(8, 12, 8, 12));
+        button.setPrefHeight(32);
+        button.setMinHeight(32);
+        button.setMaxHeight(32);
+        button.setPrefWidth(32);
+        button.setMinWidth(32);
+        button.setMaxWidth(32);
+        button.setAlignment(Pos.CENTER);
+        button.setPadding(new Insets(0));
 
-        // Store text options in user data
-        button.setUserData(new String[]{icon, fullText, shortText});
-
-        // Initially show only icon
-        updateButtonText(button, false);
+        // Always show only icon
+        button.setText(icon);
+        button.setStyle("-fx-font-size: 16px;");
+        
+        System.out.println("🔧 CREATING BUTTON: text='" + icon + "', width=" + button.getPrefWidth());
 
         Tooltip.install(button, new Tooltip(fullText));
         return button;
     }
 
     private void updateButtonText(Button button, boolean showFullText) {
-        String[] textOptions = (String[]) button.getUserData();
-        if (textOptions != null) {
-            if (showFullText) {
-                // Claude-style: Icon + Text side by side
-                button.setText(textOptions[0] + "  " + textOptions[2]); // Icon + short text
-                button.setPrefWidth(180);
-                button.setMinWidth(180);
-            } else {
-                // Icon only
-                button.setText(textOptions[0]);
-                button.setPrefWidth(38);
-                button.setMinWidth(38);
-            }
-        }
+        // No longer needed - buttons always show icon only
+        // Keeping method for compatibility but it does nothing
     }
 
     private void createContentArea() {
@@ -135,7 +129,11 @@ public class EnhancedDualPanelGroup extends VBox {
     private void handleTabClick(Button clickedTab, String tabName) {
         boolean isToolsTab = clickedTab == toolsTab;
         BooleanProperty targetProperty = isToolsTab ? toolsExpanded : structureExpanded;
+        BooleanProperty otherProperty = isToolsTab ? structureExpanded : toolsExpanded;
 
+        // Close the other panel first
+        otherProperty.set(false);
+        
         // Toggle the clicked tab
         targetProperty.set(!targetProperty.get());
 

@@ -19,6 +19,7 @@ public class StrokeCommand implements DrawingCommand {
     private final Color color;
     private final double strokeWidth;
     private boolean executed = false;
+    private boolean justFinished = false; // Track if stroke was just drawn live
 
     public StrokeCommand(DrawingCanvas canvas, DrawingTool tool, Color color, double strokeWidth) {
         this.canvas = canvas;
@@ -37,21 +38,26 @@ public class StrokeCommand implements DrawingCommand {
         if (!executed) {
             this.afterState = canvas.snapshot(null, null);
             executed = true;
+            justFinished = true; // Mark that this stroke was just drawn live
         }
     }
 
     @Override
     public void execute() {
-        if (afterState != null) {
+        // Don't re-execute if the stroke was just drawn live
+        // Only execute for redo operations
+        if (afterState != null && !justFinished) {
             // Restore the after-state
             var gc = canvas.getGraphicsContext2D();
             gc.setFill(canvas.getBackgroundColor());
             gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
             gc.drawImage(afterState, 0, 0);
-        } else {
-            // Re-draw the stroke
+        } else if (afterState == null) {
+            // Re-draw the stroke (shouldn't happen in normal flow)
             redrawStroke();
         }
+        // Mark that we're past the initial execution
+        justFinished = false;
     }
 
     @Override

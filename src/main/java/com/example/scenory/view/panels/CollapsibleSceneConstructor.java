@@ -20,9 +20,8 @@ import javafx.util.Duration;
 public class CollapsibleSceneConstructor extends VBox {
     private BooleanProperty collapsed = new SimpleBooleanProperty(false);
     private VBox contentArea;
-    private VBox collapsedStateContainer; // NEW: Container for collapsed state
+    private VBox collapsedStateContainer;
     private Button toggleButton;
-    private Label titleLabel;
     private String title;
 
     // Scene/Panel info components (moved to header)
@@ -38,8 +37,8 @@ public class CollapsibleSceneConstructor extends VBox {
     private Node thumbnailContent;
 
     // Animation properties
-    private double expandedWidth = 300;
-    private double collapsedWidth = 60; // INCREASED: More space for toggle button
+    private double expandedWidth = 280;
+    private double collapsedWidth = 48; // Compact collapsed state
     private Transition currentTransition;
 
     // Navigation callbacks
@@ -51,123 +50,102 @@ public class CollapsibleSceneConstructor extends VBox {
         this.thumbnailContent = thumbnailContent;
         this.collapsed.set(false); // Start expanded by default
 
+        // Set minimum width to prevent cut-off
+        this.setMinWidth(48);
+        
         initializeComponent();
         setupAnimation();
         applyInitialState();
 
-        System.out.println("🔧 FIXED CollapsibleSceneConstructor created: " + title);
+        System.out.println("🔧 Redesigned CollapsibleSceneConstructor created: " + title);
     }
 
     private void initializeComponent() {
         this.getStyleClass().add("enhanced-scene-constructor");
         this.setSpacing(0);
 
-        // Create enhanced header with scene/panel info at top-right
-        HBox header = createEnhancedHeader();
+        // Create modern header
+        HBox header = createModernHeader();
+        header.managedProperty().bind(collapsed.not());
+        header.visibleProperty().bind(collapsed.not());
 
-        // Create content area with navigation above thumbnails
+        // Create content area
         contentArea = createEnhancedContentArea();
         VBox.setVgrow(contentArea, Priority.ALWAYS);
 
-        // NEW: Create collapsed state container with vertical toggle
-        collapsedStateContainer = createCollapsedStateContainer();
+        // Create collapsed state
+        collapsedStateContainer = createModernCollapsedState();
 
         this.getChildren().addAll(header, contentArea, collapsedStateContainer);
     }
 
-    private HBox createEnhancedHeader() {
+    private HBox createModernHeader() {
         HBox header = new HBox(12);
-        header.getStyleClass().add("enhanced-scene-constructor-header");
-        header.setPadding(new Insets(8, 12, 8, 12));
-        header.setMinHeight(40);
-        header.setMaxHeight(40);
+        header.getStyleClass().add("modern-scene-header");
+        header.setPadding(new Insets(12, 16, 12, 16));
         header.setAlignment(Pos.CENTER_LEFT);
 
-        // Left side: Title
-        titleLabel = new Label(title);
-        titleLabel.getStyleClass().add("scene-constructor-title");
+        // Title with icon
+        Label titleLabel = new Label("📋 " + title);
+        titleLabel.getStyleClass().add("modern-scene-title");
+        titleLabel.setStyle("-fx-font-size: 13px; -fx-font-weight: 600; -fx-text-fill: #ffffff;");
 
-        // Center spacer
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        // Right side: Scene/Panel info + collapse button
-        HBox rightSection = new HBox(8);
-        rightSection.setAlignment(Pos.CENTER_RIGHT);
-
-        // Scene/Panel info container
-        VBox sceneInfo = createSceneInfoDisplay();
-
         // Collapse button
-        toggleButton = new Button();
-        toggleButton.getStyleClass().add("scene-constructor-toggle-button");
+        toggleButton = new Button("◀");
+        toggleButton.getStyleClass().add("modern-collapse-button");
         toggleButton.setOnAction(e -> toggleCollapse());
-        toggleButton.setPrefSize(18, 18);
-        toggleButton.setMinSize(18, 18);
-        toggleButton.setMaxSize(18, 18);
+        toggleButton.setPrefSize(24, 24);
+        toggleButton.setStyle("-fx-font-size: 12px; -fx-background-radius: 6; -fx-border-radius: 6;");
+        Tooltip.install(toggleButton, new Tooltip("Collapse Panel"));
 
-        rightSection.getChildren().addAll(sceneInfo, toggleButton);
-        header.getChildren().addAll(titleLabel, spacer, rightSection);
-
+        header.getChildren().addAll(titleLabel, spacer, toggleButton);
         return header;
     }
 
-    // NEW: Create collapsed state container with vertical toggle button
-    private VBox createCollapsedStateContainer() {
-        VBox collapsedContainer = new VBox(8);
-        collapsedContainer.getStyleClass().add("scene-constructor-collapsed");
+    // Modern collapsed state with vertical icon button
+    private VBox createModernCollapsedState() {
+        VBox collapsedContainer = new VBox(0);
+        collapsedContainer.getStyleClass().add("modern-collapsed-panel");
         collapsedContainer.setAlignment(Pos.TOP_CENTER);
-        collapsedContainer.setPadding(new Insets(8, 4, 8, 4));
+        collapsedContainer.setPadding(new Insets(12, 0, 12, 0));
         collapsedContainer.setVisible(false);
         collapsedContainer.setManaged(false);
 
-        // Vertical toggle button for collapsed state
-        Button collapsedToggleButton = new Button("◀");
-        collapsedToggleButton.getStyleClass().add("scene-constructor-collapsed-toggle");
-        collapsedToggleButton.setOnAction(e -> toggleCollapse());
-        collapsedToggleButton.setPrefSize(40, 30);
-        collapsedToggleButton.setMinSize(40, 30);
-        collapsedToggleButton.setMaxSize(40, 30);
-        Tooltip.install(collapsedToggleButton, new Tooltip("Expand Scene Panels"));
+        // Modern icon button
+        Button expandButton = new Button("📋");
+        expandButton.getStyleClass().add("modern-expand-button");
+        expandButton.setOnAction(e -> toggleCollapse());
+        expandButton.setPrefSize(36, 36);
+        expandButton.setMinSize(36, 36);
+        expandButton.setMaxSize(36, 36);
+        expandButton.setStyle("-fx-font-size: 18px; -fx-background-radius: 10; -fx-border-radius: 10;");
+        Tooltip.install(expandButton, new Tooltip("Expand Scene Panels"));
 
-        // Optional: Add small scene info vertically
-        Label collapsedSceneInfo = new Label();
-        collapsedSceneInfo.getStyleClass().add("collapsed-scene-info");
-        collapsedSceneInfo.setText("S42"); // Will be updated
-        collapsedSceneInfo.setStyle("-fx-font-size: 9px; -fx-text-fill: #888888;");
-
-        collapsedContainer.getChildren().addAll(collapsedToggleButton, collapsedSceneInfo);
+        collapsedContainer.getChildren().add(expandButton);
+        
+        System.out.println("🔧 Modern collapsed button created: 📋");
+        
         return collapsedContainer;
     }
 
-    private VBox createSceneInfoDisplay() {
-        VBox sceneInfo = new VBox(1);
-        sceneInfo.setAlignment(Pos.CENTER_RIGHT);
-        sceneInfo.getStyleClass().add("scene-info-container");
-
-        // Current scene label
-        currentSceneLabel = new Label("Scene 1");
-        currentSceneLabel.getStyleClass().add("current-scene-label");
-
-        // Current panel label
-        currentPanelLabel = new Label("Panel 1");
-        currentPanelLabel.getStyleClass().add("current-panel-label");
-
-        sceneInfo.getChildren().addAll(currentSceneLabel, currentPanelLabel);
-        return sceneInfo;
-    }
-
     private VBox createEnhancedContentArea() {
-        VBox content = new VBox(8);
-        content.getStyleClass().add("enhanced-scene-constructor-content");
-        content.setPadding(new Insets(8));
+        VBox content = new VBox(0);
+        content.getStyleClass().add("modern-scene-content");
+        content.setPadding(new Insets(0));
 
-        // Panel navigation controls ABOVE thumbnails (moved from bottom)
-        HBox navigation = createPanelNavigation();
+        // Modern navigation bar
+        HBox navigation = createModernNavigation();
+
+        // Scene info display
+        VBox sceneInfoPanel = createModernSceneInfo();
 
         // Thumbnails container
-        VBox thumbnailContainer = new VBox();
-        thumbnailContainer.getStyleClass().add("thumbnail-container");
+        VBox thumbnailContainer = new VBox(8);
+        thumbnailContainer.getStyleClass().add("modern-thumbnail-container");
+        thumbnailContainer.setPadding(new Insets(12));
 
         if (thumbnailContent != null) {
             thumbnailContainer.getChildren().add(thumbnailContent);
@@ -179,56 +157,63 @@ public class CollapsibleSceneConstructor extends VBox {
         thumbnailScrollPane.getStyleClass().add("invisible-scroll-pane");
         VBox.setVgrow(thumbnailScrollPane, Priority.ALWAYS);
 
-        content.getChildren().addAll(navigation, thumbnailScrollPane);
+        content.getChildren().addAll(sceneInfoPanel, navigation, thumbnailScrollPane);
         return content;
     }
 
-    private HBox createPanelNavigation() {
+    private VBox createModernSceneInfo() {
+        VBox infoPanel = new VBox(4);
+        infoPanel.getStyleClass().add("modern-scene-info-panel");
+        infoPanel.setPadding(new Insets(12, 16, 12, 16));
+        infoPanel.setStyle("-fx-background-color: rgba(30, 30, 30, 0.95); -fx-border-color: rgba(255, 255, 255, 0.05); -fx-border-width: 0 0 1 0;");
+
+        currentSceneLabel = new Label("Scene 1");
+        currentSceneLabel.setStyle("-fx-font-size: 11px; -fx-text-fill: #999999; -fx-font-weight: 500;");
+
+        currentPanelLabel = new Label("Panel 1");
+        currentPanelLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #ffffff; -fx-font-weight: 600;");
+
+        infoPanel.getChildren().addAll(currentSceneLabel, currentPanelLabel);
+        return infoPanel;
+    }
+
+    private HBox createModernNavigation() {
         HBox navigation = new HBox(8);
         navigation.setAlignment(Pos.CENTER);
-        navigation.getStyleClass().add("panel-navigation");
-        navigation.setPadding(new Insets(6, 8, 6, 8));
+        navigation.getStyleClass().add("modern-panel-navigation");
+        navigation.setPadding(new Insets(10, 12, 10, 12));
+        navigation.setStyle("-fx-background-color: rgba(25, 25, 25, 0.95);");
 
-        // Previous panel button (icon only)
+        // Previous button
         prevPanelBtn = new Button("◀");
-        prevPanelBtn.getStyleClass().add("nav-icon-button");
-        prevPanelBtn.setPrefSize(24, 20);
-        prevPanelBtn.setMinSize(24, 20);
-        prevPanelBtn.setMaxSize(24, 20);
+        prevPanelBtn.getStyleClass().add("modern-nav-button");
+        prevPanelBtn.setPrefSize(28, 28);
+        prevPanelBtn.setStyle("-fx-font-size: 11px; -fx-background-radius: 6; -fx-border-radius: 6;");
         prevPanelBtn.setOnAction(e -> {
-            if (onPreviousPanel != null) {
-                onPreviousPanel.run();
-            }
+            if (onPreviousPanel != null) onPreviousPanel.run();
         });
         Tooltip.install(prevPanelBtn, new Tooltip("Previous Panel"));
 
-        // Panel count/info in center
+        // Panel count
         panelCountLabel = new Label("1 panels");
-        panelCountLabel.getStyleClass().add("panel-count-label");
+        panelCountLabel.setStyle("-fx-font-size: 11px; -fx-text-fill: #cccccc; -fx-font-weight: 500;");
 
-        // Spacers to center the count
         Region leftSpacer = new Region();
         Region rightSpacer = new Region();
         HBox.setHgrow(leftSpacer, Priority.ALWAYS);
         HBox.setHgrow(rightSpacer, Priority.ALWAYS);
 
-        // Next panel button (icon only)
+        // Next button
         nextPanelBtn = new Button("▶");
-        nextPanelBtn.getStyleClass().add("nav-icon-button");
-        nextPanelBtn.setPrefSize(24, 20);
-        nextPanelBtn.setMinSize(24, 20);
-        nextPanelBtn.setMaxSize(24, 20);
+        nextPanelBtn.getStyleClass().add("modern-nav-button");
+        nextPanelBtn.setPrefSize(28, 28);
+        nextPanelBtn.setStyle("-fx-font-size: 11px; -fx-background-radius: 6; -fx-border-radius: 6;");
         nextPanelBtn.setOnAction(e -> {
-            if (onNextPanel != null) {
-                onNextPanel.run();
-            }
+            if (onNextPanel != null) onNextPanel.run();
         });
         Tooltip.install(nextPanelBtn, new Tooltip("Next Panel"));
 
-        navigation.getChildren().addAll(
-                prevPanelBtn, leftSpacer, panelCountLabel, rightSpacer, nextPanelBtn
-        );
-
+        navigation.getChildren().addAll(prevPanelBtn, leftSpacer, panelCountLabel, rightSpacer, nextPanelBtn);
         return navigation;
     }
 
@@ -243,12 +228,8 @@ public class CollapsibleSceneConstructor extends VBox {
     private void updateToggleButton() {
         if (collapsed.get()) {
             toggleButton.setText("◀"); // Arrow pointing left (expand)
-            titleLabel.setVisible(false);
-            titleLabel.setManaged(false);
         } else {
             toggleButton.setText("▶"); // Arrow pointing right (collapse)
-            titleLabel.setVisible(true);
-            titleLabel.setManaged(true);
         }
     }
 
@@ -351,12 +332,6 @@ public class CollapsibleSceneConstructor extends VBox {
         }
         if (panelCountLabel != null) {
             panelCountLabel.setText(totalPanels + " panels");
-        }
-
-        // Update collapsed state info too
-        if (collapsedStateContainer != null && !collapsedStateContainer.getChildren().isEmpty()) {
-            Label collapsedInfo = (Label) collapsedStateContainer.getChildren().get(1);
-            collapsedInfo.setText("S" + (panelIndex + 1));
         }
 
         // Update navigation button states
