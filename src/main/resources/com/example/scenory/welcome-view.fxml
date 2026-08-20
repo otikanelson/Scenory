@@ -6,136 +6,176 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.scenory.controller.WelcomeController"
-            styleClass="welcome-screen"
-            style="-fx-background-color: #0a0a0a;">
+            styleClass="welcome-screen">
 
-    <!-- Main Content with Header and Footer inside ScrollPane -->
+    <!-- ============ SIDEBAR (YT Music-style: compact, flat, quiet) ============ -->
+    <left>
+        <VBox styleClass="sidebar" spacing="0">
+
+            <!-- Logo -->
+            <HBox styleClass="sidebar-header" spacing="8" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20" />
+                </padding>
+                <Label text="🎬" styleClass="sidebar-logo-icon" />
+                <Label text="Scenory" styleClass="sidebar-logo-text" />
+            </HBox>
+
+            <!-- Navigation -->
+            <VBox spacing="2" styleClass="sidebar-nav">
+                <padding>
+                    <Insets top="8" right="12" bottom="8" left="12" />
+                </padding>
+
+                <Button text="Tutorials" styleClass="sidebar-nav-button" onAction="#openTutorials">
+                    <graphic><Label text="📚" styleClass="sidebar-nav-icon" /></graphic>
+                </Button>
+                <Button text="Tips" styleClass="sidebar-nav-button" onAction="#openTips">
+                    <graphic><Label text="💡" styleClass="sidebar-nav-icon" /></graphic>
+                </Button>
+                <Button text="Help" styleClass="sidebar-nav-button" onAction="#showHelp">
+                    <graphic><Label text="❓" styleClass="sidebar-nav-icon" /></graphic>
+                </Button>
+                <Button text="About" styleClass="sidebar-nav-button" onAction="#showAbout">
+                    <graphic><Label text="ℹ️" styleClass="sidebar-nav-icon" /></graphic>
+                </Button>
+            </VBox>
+
+            <!-- Spacer -->
+            <Region VBox.vgrow="ALWAYS" />
+
+            <!-- Sidebar Footer -->
+            <VBox styleClass="sidebar-footer" spacing="2">
+                <padding>
+                    <Insets top="8" right="12" bottom="16" left="12" />
+                </padding>
+                <Button text="Settings" styleClass="sidebar-nav-button" onAction="#openSettings">
+                    <graphic><Label text="⚙️" styleClass="sidebar-nav-icon" /></graphic>
+                </Button>
+                <Label text="v1.0" styleClass="sidebar-version">
+                    <padding>
+                        <Insets top="8" right="0" bottom="0" left="12" />
+                    </padding>
+                </Label>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- ============ MAIN CONTENT (flat background, no image overlay) ============ -->
     <center>
         <ScrollPane fitToWidth="true" fitToHeight="true" styleClass="main-scroll-pane">
-            <VBox spacing="0" styleClass="main-content">
-                
-                <!-- Header Section (now scrolls) -->
-                <VBox styleClass="welcome-header" spacing="0">
-                    <HBox alignment="CENTER_LEFT" spacing="20" styleClass="header-nav">
-                        <padding>
-                            <Insets top="20" right="40" bottom="20" left="40" />
-                        </padding>
+            <StackPane styleClass="page-background">
+                <Region styleClass="page-bg-image" />
+                <Region styleClass="page-bg-overlay" />
 
-                        <!-- Logo Area -->
+                <VBox spacing="0" styleClass="main-content">
+
+                <VBox spacing="44" styleClass="content-area">
+                    <padding>
+                        <Insets top="48" right="56" bottom="80" left="56" />
+                    </padding>
+
+                    <!-- ============ HERO — plain text, no boxed panel ============ -->
+                    <VBox alignment="CENTER_LEFT" spacing="10" styleClass="hero-section">
+                        <Label text="STORYBOARDING" styleClass="hero-eyebrow" />
+                        <Label text="Create Beautiful Stories" styleClass="hero-title" wrapText="true" />
+                        <Label text="Design storyboards for film, animation, and digital content."
+                               styleClass="hero-subtitle" wrapText="true" maxWidth="600" />
                         <HBox alignment="CENTER_LEFT" spacing="12">
-                            <Label text="🎬" styleClass="logo-icon" />
-                            <Label text="Scenory" styleClass="logo-text" />
+                            <VBox.margin>
+                                <Insets top="12" right="0" bottom="0" left="0" />
+                            </VBox.margin>
+                            <Button text="Start Creating" styleClass="hero-cta-primary" onAction="#createCustomProject" />
+                            <Button text="Open Project" styleClass="hero-cta-secondary" onAction="#openExistingProject" />
+                        </HBox>
+                    </VBox>
+
+                    <!-- ============ TEMPLATES ============ -->
+                    <VBox spacing="16" styleClass="templates-section">
+                        <Label text="Quick Start Templates" styleClass="section-title" />
+
+                        <HBox spacing="16" styleClass="template-cards-container">
+                            <!-- YouTube Template -->
+                            <VBox spacing="0" styleClass="template-card" onMouseClicked="#createYouTubeProject">
+                                <StackPane styleClass="template-image-container">
+                                    <Label text="📺" styleClass="template-emoji" />
+                                </StackPane>
+                                <VBox spacing="4">
+                                    <padding>
+                                        <Insets top="12" right="14" bottom="14" left="14" />
+                                    </padding>
+                                    <Label text="YouTube Video" styleClass="template-card-title" />
+                                    <Label text="16:9 · 30fps" styleClass="template-card-subtitle" />
+                                    <Button text="Create" styleClass="template-card-button"
+                                            onAction="#createYouTubeProject">
+                                        <VBox.margin><Insets top="10" /></VBox.margin>
+                                    </Button>
+                                </VBox>
+                            </VBox>
+
+                            <!-- Film Template -->
+                            <VBox spacing="0" styleClass="template-card" onMouseClicked="#createFilmProject">
+                                <StackPane styleClass="template-image-container">
+                                    <Label text="🎬" styleClass="template-emoji" />
+                                </StackPane>
+                                <VBox spacing="4">
+                                    <padding>
+                                        <Insets top="12" right="14" bottom="14" left="14" />
+                                    </padding>
+                                    <Label text="Film Production" styleClass="template-card-title" />
+                                    <Label text="2.35:1 · 24fps" styleClass="template-card-subtitle" />
+                                    <Button text="Create" styleClass="template-card-button"
+                                            onAction="#createFilmProject">
+                                        <VBox.margin><Insets top="10" /></VBox.margin>
+                                    </Button>
+                                </VBox>
+                            </VBox>
+
+                            <!-- Custom Template -->
+                            <VBox spacing="0" styleClass="template-card" onMouseClicked="#createCustomProject">
+                                <StackPane styleClass="template-image-container">
+                                    <Label text="⚙️" styleClass="template-emoji" />
+                                </StackPane>
+                                <VBox spacing="4">
+                                    <padding>
+                                        <Insets top="12" right="14" bottom="14" left="14" />
+                                    </padding>
+                                    <Label text="Custom Project" styleClass="template-card-title" />
+                                    <Label text="Your specifications" styleClass="template-card-subtitle" />
+                                    <Button text="Create" styleClass="template-card-button"
+                                            onAction="#createCustomProject">
+                                        <VBox.margin><Insets top="10" /></VBox.margin>
+                                    </Button>
+                                </VBox>
+                            </VBox>
+                        </HBox>
+                    </VBox>
+
+                    <!-- ============ RECENT PROJECTS ============ -->
+                    <VBox spacing="16" styleClass="recent-section">
+                        <HBox alignment="CENTER_LEFT" spacing="16">
+                            <Label text="Recent Projects" styleClass="section-title" />
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Button text="View All" styleClass="view-all-button" onAction="#browseAllProjects" />
                         </HBox>
 
-                        <!-- Spacer -->
-                        <Region HBox.hgrow="ALWAYS" />
-
-                        <!-- Settings Button -->
-                        <Button text="Settings" onAction="#openSettings" styleClass="header-button" />
-                    </HBox>
-                </VBox>
-
-                <!-- Content Area -->
-                <VBox spacing="40" styleClass="content-area">
-                    <padding>
-                        <Insets top="60" right="40" bottom="40" left="40" />
-                    </padding>
-
-                    <!-- Hero Section -->
-                    <VBox alignment="CENTER" spacing="20" styleClass="hero-section">
-                        <Label text="Welcome to Scenory" styleClass="space-hero-title" />
-                        <Label text="Professional storyboarding for animators, filmmakers, and content creators"
-                               styleClass="hero-subtitle" textAlignment="CENTER" wrapText="true" maxWidth="700" />
+                        <ScrollPane fitToHeight="true" hbarPolicy="AS_NEEDED" vbarPolicy="NEVER"
+                                    styleClass="recent-scroll-pane">
+                            <HBox fx:id="recentProjectsContainer" spacing="16" styleClass="recent-projects-grid">
+                                <!-- Populated by controller; placeholder below shows on first launch -->
+                                <VBox styleClass="empty-state" alignment="CENTER" spacing="6">
+                                    <Label text="No recent projects yet" styleClass="empty-state-title" />
+                                    <Label text="Start your first storyboard above" styleClass="empty-state-subtitle" />
+                                </VBox>
+                            </HBox>
+                        </ScrollPane>
                     </VBox>
 
-                    <!-- Quick Actions -->
-                    <VBox spacing="32" styleClass="quick-actions">
-
-                        <!-- New Project Section -->
-                        <VBox spacing="20">
-                            <Label text="Create New Project" styleClass="section-title" />
-
-                            <HBox spacing="24" alignment="CENTER">
-                                <!-- YouTube Template -->
-                                <VBox spacing="16" styleClass="project-template"
-                                      alignment="CENTER" onMouseClicked="#createYouTubeProject">
-                                    <Label text="📺" styleClass="template-icon" />
-                                    <Label text="YouTube Animation" styleClass="template-name" />
-                                    <Label text="16:9 aspect ratio" styleClass="template-description" />
-                                    <Button text="Create" styleClass="glass-button"
-                                            onAction="#createYouTubeProject" />
-                                </VBox>
-
-                                <!-- Film Template -->
-                                <VBox spacing="16" styleClass="project-template"
-                                      alignment="CENTER" onMouseClicked="#createFilmProject">
-                                    <Label text="🎭" styleClass="template-icon" />
-                                    <Label text="Film Storyboard" styleClass="template-name" />
-                                    <Label text="Cinema aspect ratio" styleClass="template-description" />
-                                    <Button text="Create" styleClass="glass-button"
-                                            onAction="#createFilmProject" />
-                                </VBox>
-
-                                <!-- Custom Template -->
-                                <VBox spacing="16" styleClass="project-template"
-                                      alignment="CENTER" onMouseClicked="#createCustomProject">
-                                    <Label text="⚙️" styleClass="template-icon" />
-                                    <Label text="Custom Project" styleClass="template-name" />
-                                    <Label text="Your specifications" styleClass="template-description" />
-                                    <Button text="Create" styleClass="glass-button"
-                                            onAction="#createCustomProject" />
-                                </VBox>
-                            </HBox>
-                        </VBox>
-
-                        <!-- Recent Projects Section -->
-                        <VBox spacing="16">
-                            <HBox alignment="CENTER_LEFT" spacing="16">
-                                <Label text="Recent Projects" styleClass="section-title" />
-                                <Button text="Browse All" styleClass="browse-button" onAction="#browseAllProjects" />
-                            </HBox>
-
-                            <!-- Recent Projects List -->
-                            <VBox fx:id="recentProjectsContainer" spacing="8" styleClass="recent-projects-list">
-                                <!-- Projects will be populated by controller -->
-                                <Label text="No recent projects yet. Create your first project above!"
-                                       styleClass="empty-state-text" />
-                            </VBox>
-                        </VBox>
-
-                        <!-- Quick Actions Section -->
-                        <VBox spacing="20">
-                            <Label text="Quick Actions" styleClass="section-title" />
-
-                            <HBox spacing="20" alignment="CENTER_LEFT">
-                                <Button text="📂 Open Project" styleClass="action-button"
-                                        onAction="#openExistingProject" />
-                                <Button text="📚 View Tutorials" styleClass="action-button"
-                                        onAction="#openTutorials" />
-                                <Button text="💡 Tips and Tricks" styleClass="action-button"
-                                        onAction="#openTips" />
-                            </HBox>
-                        </VBox>
-                    </VBox>
                 </VBox>
 
-                <!-- Footer (now scrolls) -->
-                <HBox alignment="CENTER_LEFT" spacing="20" styleClass="welcome-footer">
-                    <padding>
-                        <Insets top="16" right="40" bottom="16" left="40" />
-                    </padding>
+                </VBox>
 
-                    <Label text="Scenory v1.0" styleClass="footer-text" />
-
-                    <Region HBox.hgrow="ALWAYS" />
-
-                    <HBox spacing="16" alignment="CENTER_RIGHT">
-                        <Button text="About" styleClass="footer-button" onAction="#showAbout" />
-                        <Button text="Help" styleClass="footer-button" onAction="#showHelp" />
-                    </HBox>
-                </HBox>
-                
-            </VBox>
+            </StackPane>
         </ScrollPane>
     </center>
 

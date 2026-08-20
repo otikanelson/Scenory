@@ -35,10 +35,7 @@
     -fx-opacity: 0;
 }
 
-/* Force dark backgrounds */
-.vbox, .hbox, .border-pane, .anchor-pane, .stack-pane {
-    -fx-background-color: transparent;
-}
+/* Let components control their own backgrounds */
 
 .label {
     -fx-text-fill: #ffffff;

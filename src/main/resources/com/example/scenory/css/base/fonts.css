@@ -1,16 +1,15 @@
 /* ===== LOCAL FONT LOADING ===== */
 
-/* Remove all Google Font imports and use local fonts */
-
+/* Space Grotesk - Primary Display Font */
 .display-heading {
-    -fx-font-family: 'Outfit', 'Arial Black', sans-serif;
+    -fx-font-family: 'Space Grotesk', 'Outfit', 'Arial Black', sans-serif;
     -fx-font-size: 2.5em;
     -fx-font-weight: 800;
     -fx-letter-spacing: -0.02em;
 }
 
 .creative-heading {
-    -fx-font-family: 'Space Grotesk', 'Arial', sans-serif;
+    -fx-font-family: 'Space Grotesk', 'Space Grotesk', 'Arial', sans-serif;
     -fx-font-size: 1.8em;
     -fx-font-weight: 600;
     -fx-letter-spacing: -0.01em;
@@ -24,7 +23,7 @@
 }
 
 .space-hero-title {
-    -fx-font-family: 'Outfit', 'Arial Black', sans-serif;
+    -fx-font-family: 'Space Grotesk', 'Outfit', 'Arial Black', sans-serif;
     -fx-font-size: 4em;
     -fx-font-weight: 900;
     -fx-text-fill: #ffffff;

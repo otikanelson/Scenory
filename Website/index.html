@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scenory — Storyboard Studio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="site-wrapper">
+    <!-- ================= HERO WRAPPER ================= -->
+    <div class="hero-wrapper">
+      <header class="navbar-header" id="navbar">
+        <nav class="navbar">
+          <a href="#" class="nav-brand">
+            <span class="brand-icon">🎬</span>
+            <span class="brand-title">Scenory</span>
+          </a>
+          <div class="nav-actions">
+            <a href="https://github.com/otikanelson?tab=repositories" target="_blank" rel="noopener" class="nav-link">GitHub</a>
+            <a href="https://thebestportfolio.vercel.app/" target="_blank" rel="noopener" class="nav-link">Portfolio</a>
+            <a href="#download" class="btn-primary-sm">Download Prototype</a>
+          </div>
+        </nav>
+      </header>
+
+      <section class="hero-section">
+        <div class="hero-container">
+          <div class="hero-content">
+            <h1 class="hero-title write-animation">
+              <span>Streamlined Storyboarding for</span>
+              <span class="highlight-orange">Indie Creators</span>
+            </h1>
+            <p class="hero-subtitle">
+              A fast, distraction-free desktop environment built for visual storytellers, animators, and filmmakers.
+            </p>
+            <div class="hero-cta-group">
+              <a href="#download" class="btn-primary-lg">
+                <span>Download Desktop App</span>
+                <small>Free Prototype · Windows</small>
+              </a>
+              <a href="https://github.com/otikanelson?tab=repositories" target="_blank" rel="noopener" class="btn-secondary-lg">
+                View Source & Feedback
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ================= APP DEMO VIDEO SECTION ================= -->
+    <section class="demo-video-section">
+      <div class="demo-container">
+        <div class="media-frame-wrapper">
+          <div class="media-frame">
+            <div class="frame-bar">
+              <div class="frame-dots"><span></span><span></span><span></span></div>
+              <span class="frame-title">Scenory — Project Workspace Mockup</span>
+            </div>
+            <div class="media-placeholder">
+              <video id="mockupVideo" muted playsinline preload="auto" controls>
+                <source src="demo.mp4" type="video/mp4">
+              </video>
+              <div class="placeholder-fallback" id="videoFallback">
+                <span class="placeholder-icon">▶</span>
+                <p><strong>App Demonstration Video</strong></p>
+                <small>Watch the full app demonstration</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BENTO GRID FEATURE SUITE ================= -->
+    <section class="use-cases-section">
+      <div class="use-cases-container">
+        
+        <!-- Top Left: Video (Animators) -->
+        <div class="bento-card">
+          <div class="bento-media">
+            <span class="card-badge">Animation</span>
+            <video autoplay loop muted playsinline src="animators.mp4"></video>
+          </div>
+          <div class="bento-info">
+            <h3>Built for Animators</h3>
+            <p>Keyframe key beats directly into timeline sequences. Preview movement speed, export frame passes, and synchronize pencil test timing seamlessly.</p>
+          </div>
+        </div>
+
+        <!-- Top Right: Video (Short Films) -->
+        <div class="bento-card">
+          <div class="bento-media">
+            <span class="card-badge">Film</span>
+            <video autoplay loop muted playsinline src="shortfilms.mp4"></video>
+          </div>
+          <div class="bento-info">
+            <h3>Tailored for Short Films</h3>
+            <p>Plan camera angles, focal lengths, and scene flow before hitting set. Block out actor movement and communicate visual concepts instantly.</p>
+          </div>
+        </div>
+
+        <!-- Bottom Left: Image (Storyboarding) -->
+        <div class="bento-card">
+          <div class="bento-media">
+            <span class="card-badge">Core Tool</span>
+            <img src="storyboard.png" alt="Storyboarding Tools">
+          </div>
+          <div class="bento-info">
+            <h3>Fluid Storyboarding</h3>
+            <p>Arrange sequence thumbnails infinitely. Reorder beats with quick drag-and-drop actions while keeping annotations and script notes connected.</p>
+          </div>
+        </div>
+
+        <!-- Bottom Right: Video (Comics) -->
+        <div class="bento-card">
+          <div class="bento-media">
+            <span class="card-badge">Publishing</span>
+            <video autoplay loop muted playsinline src="comics.mp4"></video>
+          </div>
+          <div class="bento-info">
+            <h3>Paneling for Comics</h3>
+            <p>Draft page layouts, gutters, and speech bubble guides directly on screen. Export multi-page spreads with high-resolution vector lines.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SHOWCASE SCROLL SECTION (FEATURES) ================= -->
+    <section class="showcase-section" id="showcase">
+      <div class="showcase-sticky-container">
+        
+        <div class="features-deck">
+          <!-- Item 1: Text -->
+          <div class="revealed-deck-item text-item" id="item1">
+            <span class="feature-badge badge-orange">Feature 01</span>
+            <h2 class="feature-title">Infinite Canvas with Instant Pacing</h2>
+            <p class="feature-subtitle">Organize shots dynamically, tweak timing parameters on the fly, and visualize script beats uninterrupted.</p>
+          </div>
+
+          <!-- Item 2: Media -->
+          <div class="revealed-deck-item media-item" id="item2">
+            <div class="media-frame">
+              <div class="frame-bar">
+                <div class="frame-dots"><span></span><span></span><span></span></div>
+                <span class="frame-title">Infinite Canvas Preview</span>
+              </div>
+              <div class="shot-container">
+                <img src="shot1.png" alt="Infinite Canvas Screenshot" class="feature-shot-img">
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3: Text -->
+          <div class="revealed-deck-item text-item" id="item3">
+            <span class="feature-badge badge-blue">Feature 02</span>
+            <h2 class="feature-title">Non-Destructive Layered Drawing</h2>
+            <p class="feature-subtitle">Sketch foreground details, actor passes, and environmental backgrounds separately with fluid pen controls.</p>
+          </div>
+
+          <!-- Item 4: Media -->
+          <div class="revealed-deck-item media-item" id="item4">
+            <div class="media-frame">
+              <div class="frame-bar">
+                <div class="frame-dots"><span></span><span></span><span></span></div>
+                <span class="frame-title">Layered Drawing Tools Preview</span>
+              </div>
+              <div class="shot-container">
+                <img src="shot2.png" alt="Layered Drawing Screenshot" class="feature-shot-img">
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 5: Text -->
+          <div class="revealed-deck-item text-item" id="item5">
+            <span class="feature-badge badge-orange">Feature 03</span>
+            <h2 class="feature-title">One-Click Animatic Export</h2>
+            <p class="feature-subtitle">Convert board sequences into video previews complete with custom camera pans, zooms, and audio cues instantly.</p>
+          </div>
+
+          <!-- Item 6: Media -->
+          <div class="revealed-deck-item media-item" id="item6">
+            <div class="media-frame">
+              <div class="frame-bar">
+                <div class="frame-dots"><span></span><span></span><span></span></div>
+                <span class="frame-title">Animatic Export Preview</span>
+              </div>
+              <div class="shot-container">
+                <img src="shot3.png" alt="Animatic Export Screenshot" class="feature-shot-img">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= TESTIMONIAL SECTION ================= -->
+    <section class="testimonial-section">
+      <div class="testimonial-container">
+        <blockquote class="testimonial-quote">
+          <p class="testimonial-text">
+            "Scenory completely changed my storyboarding workflow. I can finally visualize my animation sequences 
+            <span class="highlight-text">without jumping</span> between ten different apps. The infinite canvas and layering system 
+            feel natural, like sketching on paper but with all the digital benefits."
+          </p>
+        </blockquote>
+        <div class="testimonial-author">
+          <img src="profile.png" alt="ini_animates" class="author-avatar">
+          <div class="author-info">
+            <p class="author-name">ini_animates</p>
+            <p class="author-title">Independent Animator & Content Creator</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CTA SECTION ================= -->
+    <section class="cta-section">
+      <div class="cta-container">
+        <span class="cta-badge">Ready to Start?</span>
+        <h2 class="cta-title">Download Scenory and bring your stories to life</h2>
+        <p class="cta-subtitle">Free desktop prototype available now. No signup required, just download and start creating.</p>
+        <div class="cta-buttons">
+          <a href="#download" class="btn-cta-primary">
+            <span>Download for Windows</span>
+            <small>Free • 45MB • Version 0.8.2</small>
+          </a>
+          <a href="https://github.com/otikanelson?tab=repositories" target="_blank" rel="noopener" class="btn-cta-secondary">View on GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <a href="#" class="brand"><span class="brand-icon">🎬</span> Scenory</a>
+          <p>An independent desktop tool built for visual storytellers.</p>
+        </div>
+        <div class="footer-links">
+          <div class="link-group">
+            <h4>Project</h4>
+            <a href="#download">Download App</a>
+            <a href="https://github.com/otikanelson?tab=repositories" target="_blank" rel="noopener">GitHub Repository</a>
+          </div>
+          <div class="link-group">
+            <h4>Developer</h4>
+            <a href="https://thebestportfolio.vercel.app/" target="_blank" rel="noopener">Developer Portfolio</a>
+            <a href="https://github.com/otikanelson?tab=repositories" target="_blank" rel="noopener">Other Projects</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Scenory. Designed & Developed independently.</p>
+      </div>
+    </footer>
+  </div> <!-- End site-wrapper -->
+
+  <!-- ================= REVEALED CONTACT SECTION ================= -->
+  <section class="reveal-contact-section">
+    <div class="reveal-content">
+      <div class="reveal-header">
+        <span class="reveal-badge">Get in Touch</span>
+        <h2>Let's build something together</h2>
+        <p>Open for freelance work, creative visual tools, and cross-platform projects.</p>
+      </div>
+      <div class="reveal-actions">
+        <a href="mailto:otikanelson29@gmail.com" class="btn-contact-primary">Send Email</a>
+        <div class="social-links-grid">
+          <a href="https://thebestportfolio.vercel.app/" target="_blank" rel="noopener" class="social-link">Portfolio ↗</a>
+          <a href="https://www.behance.net/somtootika" target="_blank" rel="noopener" class="social-link">Behance ↗</a>
+          <a href="https://github.com/otikanelson?tab=repositories" target="_blank" rel="noopener" class="social-link">GitHub ↗</a>
+          <a href="https://www.linkedin.com/in/otika-somtochukwu-0318622b2/" target="_blank" rel="noopener" class="social-link">LinkedIn ↗</a>
+          <a href="https://x.com/SomtoO78939" target="_blank" rel="noopener" class="social-link">Twitter / X ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

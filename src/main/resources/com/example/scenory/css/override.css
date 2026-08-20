@@ -1,0 +1,96 @@
+/* =====================================================================
+   MASTER OVERRIDE - Final word on all styling
+   This file is loaded LAST and overrides everything
+   ===================================================================== */
+
+/* Force panel backgrounds with maximum specificity */
+VBox.enhanced-dual-panel-group,
+.enhanced-dual-panel-group {
+    -fx-background-color: #1a1a1a !important;
+}
+
+VBox.dual-panel-icon-container,
+.dual-panel-icon-container {
+    -fx-background-color: #141414 !important;
+}
+
+VBox.dual-panel-content,
+.dual-panel-content {
+    -fx-background-color: #1a1a1a !important;
+}
+
+VBox.tool-selection-panel,
+.tool-selection-panel {
+    -fx-background-color: #1a1a1a !important;
+}
+
+VBox.file-structure-content,
+.file-structure-content {
+    -fx-background-color: #1a1a1a !important;
+}
+
+VBox.tools-container,
+.tools-container {
+    -fx-background-color: #1a1a1a !important;
+}
+
+VBox.tool-options-container,
+.tool-options-container {
+    -fx-background-color: #1a1a1a !important;
+}
+
+VBox.enhanced-scene-constructor,
+.enhanced-scene-constructor {
+    -fx-background-color: #1a1a1a !important;
+}
+
+HBox.enhanced-scene-constructor-header,
+.enhanced-scene-constructor-header {
+    -fx-background-color: #242424 !important;
+}
+
+VBox.scene-constructor-content,
+.scene-constructor-content {
+    -fx-background-color: #1a1a1a !important;
+}
+
+/* Force tool button styling */
+ToggleButton.tool-button,
+.tool-button {
+    -fx-background-color: #2a2a2a !important;
+    -fx-text-fill: rgba(255, 255, 255, 0.85) !important;
+    -fx-border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+ToggleButton.tool-button:hover,
+.tool-button:hover {
+    -fx-background-color: #3a3a3a !important;
+    -fx-border-color: rgba(255, 107, 53, 0.5) !important;
+}
+
+ToggleButton.tool-button:selected,
+.tool-button:selected {
+    -fx-background-color: #ff6b35 !important;
+    -fx-border-color: #ff8f00 !important;
+    -fx-text-fill: #ffffff !important;
+}
+
+/* Force tab button styling */
+Button.dual-panel-tab,
+.dual-panel-tab {
+    -fx-background-color: #2a2a2a !important;
+    -fx-text-fill: rgba(255, 255, 255, 0.7) !important;
+}
+
+Button.dual-panel-tab:hover,
+.dual-panel-tab:hover {
+    -fx-background-color: #3a3a3a !important;
+    -fx-border-color: rgba(255, 107, 53, 0.5) !important;
+}
+
+Button.dual-panel-tab-active,
+.dual-panel-tab-active {
+    -fx-background-color: #ff6b35 !important;
+    -fx-border-color: #ff8f00 !important;
+    -fx-text-fill: #ffffff !important;
+}

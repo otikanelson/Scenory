@@ -1,73 +1,86 @@
-/* ===== TOOL COMPONENTS ===== */
+/* =====================================================================
+   TOOL COMPONENTS - Drawing Tools Sidebar Styling
+   ===================================================================== */
 
 .tool-selection-panel {
-    -fx-background-color: rgba(42, 42, 42, 0.9);
-    -fx-border-color: rgba(255, 255, 255, 0.1);
-    -fx-border-radius: 12;
-    -fx-background-radius: 12;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0, 0, 2);
-}
-
-.tool-button {
-    -fx-background-color: rgba(74, 74, 74, 0.8);
-    -fx-text-fill: #ffffff;
-    -fx-border-color: rgba(255, 255, 255, 0.1);
-    -fx-border-radius: 6;
-    -fx-background-radius: 6;
-    -fx-font-family: 'Space Grotesk', 'Inter', sans-serif;
-    -fx-font-weight: 500;
-    -fx-cursor: hand;
-}
-
-.tool-button:hover {
-    -fx-background-color: rgba(85, 85, 85, 0.9);
-    -fx-border-color: rgba(255, 107, 53, 0.5);
-}
-
-.tool-button:selected {
-    -fx-background-color: rgba(255, 107, 53, 0.8);
-    -fx-border-color: #ff6b35;
-    -fx-text-fill: #ffffff;
-}
-
-/* ===== TOOL COMPONENTS ===== */
-
-.tool-selection-panel {
-    -fx-background-color: #1a1a1a;
-    -fx-spacing: 8;
-    -fx-padding: 12;
+    -fx-background-color: #1a1a1a !important;
+    -fx-spacing: 12;
+    -fx-padding: 16 12;
 }
 
 .tool-section-header {
     -fx-text-fill: #ff6b35;
     -fx-font-weight: 600;
-    -fx-font-size: 12px;
-    -fx-padding: 4 0;
+    -fx-font-size: 11px;
+    -fx-padding: 0 0 8 0;
+    -fx-letter-spacing: 0.5px;
 }
 
 .tool-button {
-    -fx-background-color: #3a3a3a;
-    -fx-text-fill: #ffffff;
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: rgba(255, 255, 255, 0.85);
     -fx-border-color: rgba(255, 255, 255, 0.1);
     -fx-border-radius: 6;
     -fx-background-radius: 6;
-    -fx-padding: 8 12;
+    -fx-padding: 10 14;
     -fx-cursor: hand;
-    -fx-font-size: 11px;
+    -fx-font-size: 12px;
+    -fx-font-weight: 500;
+    -fx-alignment: center-left;
 }
 
 .tool-button:hover {
-    -fx-background-color: #4a4a4a;
-    -fx-border-color: #ff6b35;
+    -fx-background-color: #3a3a3a;
+    -fx-border-color: rgba(255, 107, 53, 0.5);
+    -fx-text-fill: #ffffff;
 }
 
 .tool-button:selected {
     -fx-background-color: #ff6b35 !important;
     -fx-border-color: #ff8f00 !important;
+    -fx-text-fill: #ffffff !important;
 }
 
 .tool-option-label {
-    -fx-text-fill: #b0b0b0;
+    -fx-text-fill: rgba(255, 255, 255, 0.6);
     -fx-font-size: 11px;
     -fx-font-weight: 500;
+    -fx-padding: 4 0;
+}
+
+/* Tool options container */
+.tool-options-container {
+    -fx-background-color: #1a1a1a !important;
+    -fx-padding: 8 0;
+    -fx-spacing: 8;
+}
+
+/* Sliders and color pickers in tool options */
+.tool-options-container .slider {
+    -fx-background-color: transparent;
+}
+
+.tool-options-container .slider .track {
+    -fx-background-color: #3a3a3a;
+    -fx-background-radius: 4;
+}
+
+.tool-options-container .slider .thumb {
+    -fx-background-color: #ff6b35;
+    -fx-background-radius: 8;
+}
+
+.tool-options-container .slider .thumb:hover {
+    -fx-background-color: #ff8f00;
+}
+
+.tool-options-container .color-picker {
+    -fx-background-color: #2a2a2a;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.tool-options-container .color-picker:hover {
+    -fx-border-color: rgba(255, 107, 53, 0.5);
 }

@@ -1,28 +1,259 @@
-/* ===== MAIN INTERFACE LAYOUT ===== */
+/* =====================================================================
+   SCENORY — MODERN DARK STUDIO THEME
+   ===================================================================== */
+
+.root {
+    -fx-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -fx-base: #121212;
+    -fx-background-color: #121212;
+}
 
 .main-border-pane {
-    -fx-background-color: #0a0a0a;
+    -fx-background-color: #121212;
 }
 
-.canvas-container {
-    -fx-background-color: #0a0a0a;
+/* ===== MENU BAR & TOOL PROPERTIES ===== */
+.top-container {
+    -fx-background-color: #181818;
+    -fx-border-color: #262626;
+    -fx-border-width: 0 0 1 0;
 }
 
-.canvas-stack-pane {
-    -fx-background-color: #0a0a0a;
-}
-
-.invisible-scroll-pane {
+.app-menu-bar {
     -fx-background-color: transparent;
-    -fx-border-color: transparent;
+    -fx-padding: 2 6;
 }
 
-.invisible-scroll-pane .viewport {
+.app-menu-bar .label {
+    -fx-text-fill: #a3a3a3;
+    -fx-font-size: 11px;
+}
+
+.app-menu-bar .menu:hover,
+.app-menu-bar .menu:showing {
+    -fx-background-color: #262626;
+}
+
+.tool-properties-bar {
+    -fx-background-color: #1e1e1e;
+    -fx-border-color: #262626;
+    -fx-border-width: 1 0 0 0;
+    -fx-min-height: 36;
+}
+
+.section-subhead {
+    -fx-text-fill: #3b82f6;
+    -fx-font-weight: 700;
+    -fx-font-size: 11px;
+}
+
+.property-label {
+    -fx-text-fill: #737373;
+    -fx-font-size: 11px;
+}
+
+.property-value {
+    -fx-text-fill: #e5e5e5;
+    -fx-font-size: 11px;
+    -fx-font-weight: 600;
+}
+
+/* ===== LEFT — TOOL RAIL ===== */
+.tools-sidebar {
+    -fx-background-color: #181818;
+    -fx-min-width: 48;
+    -fx-max-width: 48;
+    -fx-border-color: #262626;
+    -fx-border-width: 0 1 0 0;
+}
+
+/* ToggleButtons for Tool Selection */
+.tool-icon-btn {
+    -fx-background-color: transparent;
+    -fx-background-radius: 6;
+    -fx-min-width: 34;
+    -fx-min-height: 34;
+    -fx-max-width: 34;
+    -fx-max-height: 34;
+    -fx-alignment: center;
+    -fx-padding: 0;
+    -fx-cursor: hand;
+}
+
+.tool-icon-btn:hover {
+    -fx-background-color: #262626;
+}
+
+.tool-icon-btn:selected {
+    -fx-background-color: #3b82f6;
+}
+
+.tool-icon-glyph {
+    -fx-fill: #a3a3a3;
+}
+
+.tool-icon-btn:hover .tool-icon-glyph,
+.tool-icon-btn:selected .tool-icon-glyph {
+    -fx-fill: #ffffff;
+}
+
+.tool-icon-glyph-outline {
+    -fx-fill: transparent;
+    -fx-stroke: #a3a3a3;
+    -fx-stroke-width: 1.5;
+}
+
+.tool-icon-btn:hover .tool-icon-glyph-outline,
+.tool-icon-btn:selected .tool-icon-glyph-outline {
+    -fx-stroke: #ffffff;
+}
+
+.tool-icon-text-glyph {
+    -fx-font-size: 13px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #a3a3a3;
+}
+
+.tool-icon-btn:selected .tool-icon-text-glyph {
+    -fx-text-fill: #ffffff;
+}
+
+.tool-divider {
+    -fx-padding: 4 0;
+}
+
+.tool-divider .line {
+    -fx-border-color: #262626;
+    -fx-border-width: 1 0 0 0;
+}
+
+/* Color Swatches */
+.color-swatch-btn {
+    -fx-min-width: 24;
+    -fx-min-height: 24;
+    -fx-background-radius: 12;
+    -fx-border-color: #404040;
+    -fx-border-radius: 12;
+    -fx-cursor: hand;
+}
+
+.primary-swatch { -fx-background-color: #000000; }
+.secondary-swatch { -fx-background-color: #ffffff; }
+
+/* ===== CENTER — CANVAS ===== */
+.canvas-workspace {
+    -fx-background-color: #0a0a0a;
+}
+
+.canvas-scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.canvas-scroll-pane > .viewport {
     -fx-background-color: transparent;
 }
 
-.invisible-scroll-pane .scroll-bar {
-    -fx-opacity: 0;
-    -fx-pref-width: 0;
-    -fx-pref-height: 0;
+.canvas-frame {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 24, 0, 0, 12);
+}
+
+.drawing-canvas {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 2;
+}
+
+/* ===== RIGHT — TABBED INSPECTOR SIDEBAR ===== */
+.scene-sidebar {
+    -fx-background-color: #181818;
+    -fx-border-color: #262626;
+    -fx-border-width: 0 0 0 1;
+}
+
+.inspector-tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #181818;
+}
+
+.inspector-tab-pane .tab {
+    -fx-background-color: transparent;
+    -fx-padding: 6 16;
+}
+
+.inspector-tab-pane .tab:selected {
+    -fx-background-color: #262626;
+    -fx-border-color: #3b82f6;
+    -fx-border-width: 0 0 2 0;
+}
+
+.inspector-tab-pane .tab .tab-label {
+    -fx-text-fill: #a3a3a3;
+    -fx-font-size: 11px;
+    -fx-font-weight: 600;
+}
+
+.inspector-tab-pane .tab:selected .tab-label {
+    -fx-text-fill: #ffffff;
+}
+
+.scene-info-card {
+    -fx-background-color: #222222;
+    -fx-background-radius: 6;
+    -fx-padding: 10 12;
+}
+
+.panel-title {
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #ffffff;
+}
+
+.panel-subtitle {
+    -fx-font-size: 10px;
+    -fx-text-fill: #737373;
+}
+
+.panel-add-btn {
+    -fx-background-color: #3b82f6;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 11px;
+    -fx-font-weight: 600;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+}
+
+.panel-add-btn:hover {
+    -fx-background-color: #2563eb;
+}
+
+.thumbnail-frame {
+    -fx-background-color: #121212;
+    -fx-border-color: #262626;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+/* ===== STATUS BAR ===== */
+.status-bar {
+    -fx-background-color: #181818;
+    -fx-border-color: #262626;
+    -fx-border-width: 1 0 0 0;
+    -fx-min-height: 28;
+}
+
+.status-label, .status-info {
+    -fx-font-size: 11px;
+    -fx-text-fill: #737373;
+}
+
+.zoom-btn, .layer-action-btn {
+    -fx-background-color: #262626;
+    -fx-text-fill: #a3a3a3;
+    -fx-padding: 1 6;
+    -fx-background-radius: 3;
+    -fx-cursor: hand;
+}
+
+.zoom-btn:hover, .layer-action-btn:hover {
+    -fx-background-color: #404040;
+    -fx-text-fill: #ffffff;
 }

@@ -1,17 +1,5 @@
 package com.example.scenory.controller;
 
-import com.example.scenory.model.Project;
-import com.example.scenory.model.Scene;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.HBox;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -22,9 +10,30 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.example.scenory.model.Project;
+import com.example.scenory.model.Scene;
+import com.example.scenory.view.templates.ModalTemplate;
+import com.example.scenory.view.templates.config.ModalConfig;
+
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
 public class WelcomeController implements Initializable {
 
-    @FXML private VBox recentProjectsContainer;
+    @FXML private HBox recentProjectsContainer;
 
     // Recent projects storage (in a real app, this would be persisted)
     private List<RecentProject> recentProjects = new ArrayList<>();
@@ -50,7 +59,7 @@ public class WelcomeController implements Initializable {
         // - 30fps timeline
         // - Standard YouTube scene duration
 
-        addToRecentProjects(project);
+        addToRecentProjects(project, "youtube");
         launchMainApplication(project);
     }
 
@@ -64,7 +73,7 @@ public class WelcomeController implements Initializable {
         // - 24fps timeline
         // - Longer scene durations
 
-        addToRecentProjects(project);
+        addToRecentProjects(project, "film");
         launchMainApplication(project);
     }
 
@@ -78,7 +87,7 @@ public class WelcomeController implements Initializable {
             Project project = createNewProject(settings.get().name, "custom");
             // Apply custom settings
 
-            addToRecentProjects(project);
+            addToRecentProjects(project, "custom");
             launchMainApplication(project);
         }
     }
@@ -102,7 +111,7 @@ public class WelcomeController implements Initializable {
 
             // For now, create a dummy project
             Project project = createNewProject(selectedFile.getName().replace(".scenory", ""), "loaded");
-            addToRecentProjects(project);
+            addToRecentProjects(project, "loaded");
             launchMainApplication(project);
         }
     }
@@ -124,48 +133,68 @@ public class WelcomeController implements Initializable {
         recentProjectsContainer.getChildren().clear();
 
         if (recentProjects.isEmpty()) {
-            Label emptyLabel = new Label("No recent projects yet. Create your first project above!");
-            emptyLabel.getStyleClass().add("empty-state-text");
-            recentProjectsContainer.getChildren().add(emptyLabel);
+            VBox empty = new VBox(6);
+            empty.getStyleClass().add("empty-state");
+            empty.setAlignment(Pos.CENTER);
+
+            Label title = new Label("No recent projects yet");
+            title.getStyleClass().add("empty-state-title");
+            Label subtitle = new Label("Start your first storyboard above");
+            subtitle.getStyleClass().add("empty-state-subtitle");
+
+            empty.getChildren().addAll(title, subtitle);
+            recentProjectsContainer.getChildren().add(empty);
         } else {
             for (RecentProject recent : recentProjects) {
-                HBox projectItem = createRecentProjectItem(recent);
-                recentProjectsContainer.getChildren().add(projectItem);
+                VBox card = createRecentProjectCard(recent);
+                recentProjectsContainer.getChildren().add(card);
             }
         }
     }
 
-    private HBox createRecentProjectItem(RecentProject recent) {
-        HBox item = new HBox(16);
-        item.getStyleClass().add("recent-project-item");
+    /**
+     * Builds a flat recent-project card: a neutral thumbnail block with a
+     * small icon, title, and last-modified date below - matches the
+     * template card styling so the whole page reads as one consistent
+     * flat, uncluttered system (no tags, no overlays, no color-coding).
+     */
+    private VBox createRecentProjectCard(RecentProject recent) {
+        VBox card = new VBox();
+        card.getStyleClass().add("recent-card");
+        card.setOnMouseClicked(e -> openRecentProject(recent));
 
-        // Project info
-        VBox info = new VBox(4);
+        StackPane thumb = new StackPane();
+        thumb.getStyleClass().add("recent-card-thumb");
+        Label icon = new Label(iconForType(recent.type));
+        icon.getStyleClass().add("recent-card-icon");
+        thumb.getChildren().add(icon);
 
+        VBox info = new VBox(2);
+        info.setPadding(new Insets(10, 14, 12, 14));
         Label nameLabel = new Label(recent.name);
-        nameLabel.getStyleClass().add("recent-project-name");
+        nameLabel.getStyleClass().add("recent-card-title");
+        nameLabel.setWrapText(true);
+        Label dateLabel = new Label(recent.lastModified.format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
+        dateLabel.getStyleClass().add("recent-card-date");
+        info.getChildren().addAll(nameLabel, dateLabel);
 
-        Label pathLabel = new Label(recent.path);
-        pathLabel.getStyleClass().add("recent-project-path");
+        card.getChildren().addAll(thumb, info);
+        return card;
+    }
 
-        Label dateLabel = new Label("Modified: " + recent.lastModified.format(
-                DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm")
-        ));
-        dateLabel.getStyleClass().add("recent-project-date");
-
-        info.getChildren().addAll(nameLabel, pathLabel, dateLabel);
-
-        // Spacer
-        javafx.scene.layout.Region spacer = new javafx.scene.layout.Region();
-        HBox.setHgrow(spacer, javafx.scene.layout.Priority.ALWAYS);
-
-        // Open button
-        Button openButton = new Button("Open");
-        openButton.getStyleClass().addAll("recent-project-button", "primary-button");
-        openButton.setOnAction(e -> openRecentProject(recent));
-
-        item.getChildren().addAll(info, spacer, openButton);
-        return item;
+    /** Maps a project type to a small neutral icon for the thumbnail block. */
+    private String iconForType(String type) {
+        if (type == null) return "🗂️";
+        switch (type) {
+            case "youtube":
+                return "📺";
+            case "film":
+                return "🎬";
+            case "custom":
+                return "⚙️";
+            default:
+                return "🗂️";
+        }
     }
 
     private void openRecentProject(RecentProject recent) {
@@ -176,12 +205,12 @@ public class WelcomeController implements Initializable {
         launchMainApplication(project);
     }
 
-    private void addToRecentProjects(Project project) {
+    private void addToRecentProjects(Project project, String type) {
         RecentProject recent = new RecentProject();
         recent.name = project.getName();
         recent.path = "~/Documents/Scenory/" + project.getName() + ".scenory";
         recent.lastModified = LocalDateTime.now();
-        recent.type = "storyboard";
+        recent.type = type;
 
         // Add to beginning of list
         recentProjects.add(0, recent);
@@ -197,8 +226,7 @@ public class WelcomeController implements Initializable {
     @FXML
     private void browseAllProjects() {
         System.out.println("📁 Browse all projects...");
-        // TODO: Implement project browser
-        showInfo("Project Browser", "Project browser coming soon!");
+        showInfoModal("Project Browser", "Project browser coming soon!");
     }
 
     // ===============================
@@ -228,14 +256,38 @@ public class WelcomeController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/scenory/main-view.fxml"));
             Parent mainView = loader.load();
 
-            // Get the main controller and pass the project
+            // Create NEW scene
+            Stage stage = (Stage) recentProjectsContainer.getScene().getWindow();
+            javafx.scene.Scene newScene = new javafx.scene.Scene(mainView);
+            
+            // Load CSS stylesheet
+            try {
+                String cssFile = getClass().getResource("/com/example/scenory/styles.css").toExternalForm();
+                newScene.getStylesheets().clear();
+                newScene.getStylesheets().add(cssFile);
+                System.out.println("✅ CSS loaded for main view: " + cssFile);
+            } catch (Exception e) {
+                System.err.println("⚠️ CSS file not found for main view");
+            }
+            
+            // Store maximized state before Scene transition to preserve valid window bounds
+            boolean wasMaximized = stage.isMaximized();
+            if (wasMaximized) {
+                stage.setMaximized(false);  // Temporarily restore to normal
+            }
+            
+            // Set the scene
+            stage.setScene(newScene);
+            stage.setTitle("Scenory - " + project.getName());
+            
+            // Re-maximize if the window was maximized before
+            if (wasMaximized) {
+                stage.setMaximized(true);
+            }
+            
+            // Get the controller and load the project
             MainController mainController = loader.getController();
             mainController.loadProject(project);
-
-            // Replace current scene with main application
-            Stage stage = (Stage) recentProjectsContainer.getScene().getWindow();
-            stage.getScene().setRoot(mainView);
-            stage.setTitle("Scenory - " + project.getName());
 
         } catch (IOException e) {
             System.err.println("❌ Failed to launch main application: " + e.getMessage());
@@ -269,19 +321,19 @@ public class WelcomeController implements Initializable {
     @FXML
     private void openSettings() {
         System.out.println("⚙️ Opening settings...");
-        showInfo("Settings", "Settings panel coming soon!");
+        showInfoModal("Settings", "Settings panel coming soon!");
     }
 
     @FXML
     private void openTutorials() {
         System.out.println("📖 Opening tutorials...");
-        showInfo("Tutorials", "Interactive tutorials coming soon!");
+        showInfoModal("Tutorials", "Interactive tutorials coming soon!");
     }
 
     @FXML
     private void openTips() {
         System.out.println("💡 Opening tips...");
-        showInfo("Tips & Tricks", "Pro tips and workflow guides coming soon!");
+        showInfoModal("Tips & Tricks", "Pro tips and workflow guides coming soon!");
     }
 
     @FXML
@@ -298,20 +350,46 @@ public class WelcomeController implements Initializable {
 
     @FXML
     private void showHelp() {
-        showInfo("Help", "Help documentation coming soon!\n\n" +
-                "For now, try creating a new project above.");
+        showInfoModal("Help", "Help documentation coming soon!\n\nFor now, try creating a new project above.");
     }
 
     // ===============================
     // HELPER METHODS
     // ===============================
 
-    private void showInfo(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+    private void showInfoModal(String title, String message) {
+        // Create modal content
+        VBox content = new VBox(15);
+        content.setPadding(new Insets(20));
+        content.setAlignment(Pos.CENTER_LEFT);
+        
+        Label messageLabel = new Label(message);
+        messageLabel.setWrapText(true);
+        messageLabel.setStyle("-fx-font-size: 14px;");
+        
+        Button okButton = new Button("OK");
+        okButton.setStyle("-fx-min-width: 80px;");
+        okButton.setDefaultButton(true);
+        
+        content.getChildren().addAll(messageLabel, okButton);
+        
+        // Get current stage as owner
+        Stage owner = (Stage) recentProjectsContainer.getScene().getWindow();
+        
+        // Create modal configuration
+        ModalConfig config = ModalConfig.builder()
+            .title(title)
+            .dimensions(400, 200)
+            .minDimensions(350, 150)
+            .owner(owner)
+            .resizable(false)
+            .build();
+        
+        // Create and show modal
+        ModalTemplate modal = ModalTemplate.createWithContent(content, config);
+        okButton.setOnAction(e -> modal.close());
+        
+        modal.showAndWait();
     }
 
     private void showError(String title, String message) {

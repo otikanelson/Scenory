@@ -1,140 +1,238 @@
-/* ===== PANEL COMPONENTS ===== */
+/* =====================================================================
+   PANEL COMPONENTS - Clean, Organized Sidebar Styling
+   ===================================================================== */
 
-.collapsible-panel {
-    -fx-background-color: #2a2a2a;
-    -fx-border-color: #4a4a4a;
-    -fx-border-width: 0 1 0 0;
-}
-
-.collapsible-panel-header {
-    -fx-background-color: #333333;
-    -fx-border-color: #4a4a4a;
-    -fx-border-width: 0 0 1 0;
-    -fx-alignment: center-left;
-}
-
-.panel-toggle-button {
-    -fx-text-fill: #ffffff;
-    -fx-border-color: #666666;
-    -fx-border-radius: 3;
-    -fx-border-Radius: 15;
-    -fx-font-size: 10px;
-    -fx-font-weight: bold;
-    -fx-cursor: hand;
-}
-
-.panel-toggle-button:hover {
-    -fx-background-color: #bf5700;
-    -fx-border-color: #ff8f00;
-}
+/* ===== LEFT SIDEBAR - Enhanced Dual Panel Group ===== */
 
 .enhanced-dual-panel-group {
-    -fx-background-color: rgba(26, 26, 26, 0.9);
-    -fx-border-color: rgba(255, 255, 255, 0.1);
-    -fx-border-width: 0 1 0 0;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0, 2, 0);
-}
-
-.enhanced-scene-constructor {
-    -fx-background-color: rgba(26, 26, 26, 0.9);
-    -fx-border-color: rgba(255, 255, 255, 0.1);
-    -fx-border-width: 0 0 0 1;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0, -2, 0);
-}
-
-.enhanced-scene-constructor-header {
-    -fx-background-color: rgba(51, 51, 51, 0.9);
-    -fx-border-color: rgba(255, 255, 255, 0.1);
-    -fx-border-width: 0 0 1 0;
-}
-
-.scene-constructor-title {
-    -fx-text-fill: #ffffff;
-    -fx-font-family: 'Outfit', 'Inter', sans-serif;
-    -fx-font-weight: 700;
-    -fx-font-size: 14px;
-}
-
-/* ===== PANEL COMPONENTS ===== */
-
-.enhanced-dual-panel-group {
-    -fx-background-color: #1a1a1a;
-    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-background-color: #FF0000 !important; /* TEMPORARY DEBUG - BRIGHT RED */
+    -fx-border-color: rgba(255, 255, 255, 0.08);
     -fx-border-width: 0 1 0 0;
 }
 
+/* Icon container - vertical bar with tab icons */
 .dual-panel-icon-container {
-    -fx-background-color: rgba(20, 20, 20, 0.95);
-    -fx-padding: 8 6;
-    -fx-spacing: 6;
+    -fx-background-color: #141414 !important;
+    -fx-padding: 10 6;
+    -fx-spacing: 8;
     -fx-border-color: rgba(255, 255, 255, 0.05);
     -fx-border-width: 0 1 0 0;
 }
 
+/* Tab buttons (icons) */
 .dual-panel-tab {
-    -fx-background-color: rgba(45, 45, 45, 0.9);
-    -fx-text-fill: #ffffff;
-    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: rgba(255, 255, 255, 0.7);
+    -fx-border-color: rgba(255, 255, 255, 0.1);
     -fx-border-radius: 8;
     -fx-background-radius: 8;
     -fx-font-size: 16px;
     -fx-cursor: hand;
     -fx-padding: 0;
-    -fx-pref-width: 32;
-    -fx-pref-height: 32;
-    -fx-min-width: 32;
-    -fx-min-height: 32;
-    -fx-max-width: 32;
-    -fx-max-height: 32;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 4, 0, 0, 2);
+    -fx-pref-width: 38;
+    -fx-pref-height: 38;
+    -fx-min-width: 38;
+    -fx-min-height: 38;
+    -fx-max-width: 38;
+    -fx-max-height: 38;
 }
 
 .dual-panel-tab:hover {
-    -fx-background-color: rgba(60, 60, 60, 1);
-    -fx-border-color: rgba(255, 107, 53, 0.7);
-    -fx-scale-x: 1.1;
-    -fx-scale-y: 1.1;
-    -fx-effect: dropshadow(gaussian, rgba(255, 107, 53, 0.4), 8, 0, 0, 2);
+    -fx-background-color: #3a3a3a;
+    -fx-border-color: rgba(255, 107, 53, 0.5);
+    -fx-text-fill: #ffffff;
 }
 
 .dual-panel-tab-active {
-    -fx-background-color: rgba(255, 107, 53, 0.95) !important;
-    -fx-border-color: rgba(255, 139, 0, 0.9) !important;
+    -fx-background-color: #ff6b35 !important;
+    -fx-border-color: #ff8f00 !important;
     -fx-text-fill: #ffffff !important;
-    -fx-effect: dropshadow(gaussian, rgba(255, 107, 53, 0.6), 10, 0, 0, 3);
 }
 
+/* Panel content area */
 .dual-panel-content {
-    -fx-background-color: #1a1a1a;
-    -fx-padding: 12;
+    -fx-background-color: #1a1a1a !important;
+    -fx-padding: 0;
 }
 
+/* Dual panel layout - when both panels are open */
+.dual-panel-layout {
+    -fx-background-color: #1a1a1a !important;
+}
+
+.horizontal-dual-panel {
+    -fx-background-color: #1a1a1a !important;
+}
+
+.dual-panel-left-section,
+.dual-panel-right-section {
+    -fx-background-color: #1a1a1a !important;
+}
+
+.dual-panel-vertical-separator {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+}
+
+.dual-panel-scroll {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.dual-panel-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Compact headers for dual panel mode */
+.dual-panel-compact-header {
+    -fx-background-color: #242424;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 8 12;
+    -fx-min-height: 36;
+    -fx-max-height: 36;
+}
+
+.dual-panel-compact-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 600;
+    -fx-font-size: 12px;
+}
+
+.dual-panel-close-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: rgba(255, 255, 255, 0.5);
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 0;
+}
+
+.dual-panel-close-btn:hover {
+    -fx-text-fill: #ff6b35;
+}
+
+/* Tool Selection Panel */
 .tool-selection-panel {
-    -fx-background-color: #1a1a1a;
-    -fx-padding: 12;
+    -fx-background-color: #1a1a1a !important;
+    -fx-padding: 16 12;
 }
 
+/* File Structure Content */
 .file-structure-content {
-    -fx-background-color: #1a1a1a;
-    -fx-padding: 12;
+    -fx-background-color: #1a1a1a !important;
+    -fx-padding: 16 12;
 }
+
+.section-header {
+    -fx-text-fill: #ff6b35;
+    -fx-font-weight: 600;
+    -fx-font-size: 11px;
+    -fx-padding: 0 0 8 0;
+    -fx-letter-spacing: 0.5px;
+    -fx-text-transform: uppercase;
+}
+
+/* ===== RIGHT SIDEBAR - Scene Constructor ===== */
 
 .enhanced-scene-constructor {
-    -fx-background-color: #1a1a1a;
-    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-background-color: #1a1a1a !important;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
     -fx-border-width: 0 0 0 1;
 }
 
 .enhanced-scene-constructor-header {
-    -fx-background-color: #2a2a2a;
-    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-background-color: #242424 !important;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
     -fx-border-width: 0 0 1 0;
     -fx-padding: 12;
 }
 
+.scene-constructor-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-font-weight: 600;
+    -fx-font-size: 13px;
+}
+
 .scene-constructor-content {
-    -fx-background-color: #1a1a1a;
+    -fx-background-color: #1a1a1a !important;
     -fx-padding: 12;
+}
+
+.scene-constructor-toggle-button {
+    -fx-background-color: #2a2a2a;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-text-fill: rgba(255, 255, 255, 0.8);
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-padding: 8 12;
+    -fx-cursor: hand;
+}
+
+.scene-constructor-toggle-button:hover {
+    -fx-background-color: #ff6b35;
+    -fx-border-color: #ff8f00;
+    -fx-text-fill: #ffffff;
+}
+
+/* Modern collapsed panel */
+.modern-collapsed-panel {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 0 0 0 1;
+}
+
+.modern-expand-button {
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: rgba(255, 255, 255, 0.8);
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-padding: 8;
+}
+
+.modern-expand-button:hover {
+    -fx-background-color: #ff6b35;
+    -fx-border-color: #ff8f00;
+    -fx-text-fill: #ffffff;
+}
+
+/* Navigation buttons in scene constructor */
+.modern-nav-button {
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: rgba(255, 255, 255, 0.8);
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-padding: 6 12;
+    -fx-font-size: 11px;
+}
+
+.modern-nav-button:hover {
+    -fx-background-color: #3a3a3a;
+    -fx-border-color: rgba(255, 107, 53, 0.6);
+    -fx-text-fill: #ffffff;
+}
+
+.modern-nav-button:disabled {
+    -fx-opacity: 0.3;
+    -fx-cursor: default;
+}
+
+/* ===== SHARED COMPONENTS ===== */
+
+/* Thumbnail container */
+.thumbnail-container {
+    -fx-background-color: transparent;
+}
+
+.modern-thumbnail-container {
+    -fx-background-color: transparent;
 }
 
 /* Tree view styling */
@@ -145,201 +243,88 @@
 
 .tree-view .tree-cell {
     -fx-background-color: transparent;
-    -fx-text-fill: #ffffff;
-    -fx-padding: 4 8;
+    -fx-text-fill: rgba(255, 255, 255, 0.8);
+    -fx-padding: 6 8;
+    -fx-font-size: 12px;
+}
+
+.tree-view .tree-cell:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
 }
 
 .tree-view .tree-cell:selected {
-    -fx-background-color: #ff6b35;
+    -fx-background-color: rgba(255, 107, 53, 0.3);
     -fx-text-fill: #ffffff;
 }
 
-/* Add to existing panels.css */
-
-.dual-panel-layout {
-    -fx-background-color: #1a1a1a;
+.tree-view:focused .tree-cell:selected {
+    -fx-background-color: rgba(255, 107, 53, 0.5);
 }
 
-.horizontal-dual-panel {
-    -fx-background-color: #1a1a1a;
-}
-
-.thumbnail-container {
-    -fx-background-color: #1a1a1a;
-}
-
-/* Modern Scene Constructor Styles */
-
-.enhanced-scene-constructor {
-    -fx-background-color: rgba(18, 18, 18, 0.98);
-    -fx-border-color: rgba(255, 255, 255, 0.06);
-    -fx-border-width: 0 0 0 1;
-}
-
-.modern-scene-header {
-    -fx-background-color: rgba(25, 25, 25, 0.95);
-    -fx-border-color: rgba(255, 255, 255, 0.06);
-    -fx-border-width: 0 0 1 0;
-}
-
-.modern-collapse-button {
-    -fx-background-color: rgba(50, 50, 50, 0.9);
-    -fx-text-fill: #ffffff;
-    -fx-border-color: rgba(255, 255, 255, 0.1);
-    -fx-cursor: hand;
-}
-
-.modern-collapse-button:hover {
-    -fx-background-color: rgba(255, 107, 53, 0.9);
-    -fx-border-color: rgba(255, 139, 0, 0.8);
-}
-
-.modern-scene-content {
-    -fx-background-color: rgba(18, 18, 18, 0.98);
-}
-
-.modern-thumbnail-container {
+/* Scroll bars for panels */
+.enhanced-dual-panel-group .scroll-bar:vertical,
+.enhanced-scene-constructor .scroll-bar:vertical {
     -fx-background-color: transparent;
+    -fx-pref-width: 8px;
 }
 
-.modern-nav-button {
-    -fx-background-color: rgba(50, 50, 50, 0.9);
-    -fx-text-fill: #ffffff;
-    -fx-border-color: rgba(255, 255, 255, 0.1);
-    -fx-cursor: hand;
+.enhanced-dual-panel-group .scroll-bar:vertical .thumb,
+.enhanced-scene-constructor .scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-background-radius: 4px;
 }
 
-.modern-nav-button:hover {
-    -fx-background-color: rgba(70, 70, 70, 1);
-    -fx-border-color: rgba(255, 107, 53, 0.6);
+.enhanced-dual-panel-group .scroll-bar:vertical .thumb:hover,
+.enhanced-scene-constructor .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.25);
 }
 
-.modern-nav-button:disabled {
-    -fx-opacity: 0.3;
-}
-
-.modern-collapsed-panel {
-    -fx-background-color: rgba(18, 18, 18, 0.98);
-    -fx-border-color: rgba(255, 255, 255, 0.06);
-    -fx-border-width: 0 0 0 1;
-}
-
-.modern-expand-button {
-    -fx-background-color: rgba(45, 45, 45, 0.95);
-    -fx-text-fill: #ffffff;
-    -fx-border-color: rgba(255, 255, 255, 0.1);
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 6, 0, 0, 2);
-}
-
-.modern-expand-button:hover {
-    -fx-background-color: rgba(255, 107, 53, 0.95);
-    -fx-border-color: rgba(255, 139, 0, 0.9);
-    -fx-scale-x: 1.12;
-    -fx-scale-y: 1.12;
-    -fx-effect: dropshadow(gaussian, rgba(255, 107, 53, 0.6), 10, 0, 0, 3);
-}
-
-/* Force all containers to be dark */
-.tools-container {
-    -fx-background-color: #1a1a1a;
-}
-
-.tool-options-container {
-    -fx-background-color: #1a1a1a;
-}
-
-.resizable-tree-view {
-    -fx-background-color: #1a1a1a;
-}
-/* Hide redundant headers in dual panel mode */
-.dual-panel-left-section .section-header,
-.dual-panel-right-section .section-header {
-    -fx-opacity: 0;
-    -fx-max-height: 0;
+.enhanced-dual-panel-group .scroll-bar .increment-button,
+.enhanced-dual-panel-group .scroll-bar .decrement-button,
+.enhanced-scene-constructor .scroll-bar .increment-button,
+.enhanced-scene-constructor .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
     -fx-pref-height: 0;
 }
 
-/* Single header for dual panel */
-.dual-panel-compact-header {
-    -fx-background-color: #2a2a2a;
-    -fx-border-color: rgba(255, 255, 255, 0.1);
-    -fx-border-width: 0 0 1 0;
-    -fx-padding: 8 12;
-    -fx-min-height: 28;
-    -fx-max-height: 28;
-}
-
-.dual-panel-compact-title {
-    -fx-text-fill: #ff6b35;
-    -fx-font-weight: 600;
-    -fx-font-size: 11px;
-}
-
-.dual-panel-close-btn {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-    -fx-text-fill: #b0b0b0;
-    -fx-font-size: 12px;
-    -fx-cursor: hand;
-}
-
-.dual-panel-close-btn:hover {
-    -fx-text-fill: #ff6b35;
-}
-/* Consistent border for structure panel */
-.file-structure-content {
+/* Container backgrounds */
+.tools-container,
+.tool-options-container,
+.resizable-tree-view {
     -fx-background-color: #1a1a1a;
-    -fx-border-color: rgba(255, 255, 255, 0.1);
-    -fx-border-width: 1;
-    -fx-border-radius: 8;
-    -fx-background-radius: 8;
-    -fx-padding: 12;
 }
 
-.section-header {
-    -fx-text-fill: #ff6b35;
-    -fx-font-weight: 600;
-    -fx-font-size: 12px;
-    -fx-padding: 4 0 8 0;
-}
-
-/* Single toggle button for scene constructor */
-.scene-constructor-toggle-button {
-    -fx-background-color: #3a3a3a;
-    -fx-border-color: rgba(255, 255, 255, 0.1);
-    -fx-border-radius: 6;
-    -fx-background-radius: 6;
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 14px;
-    -fx-font-weight: 600;
-    -fx-padding: 6 8;
-    -fx-cursor: hand;
-}
-
-.scene-constructor-toggle-button:hover {
-    -fx-background-color: #ff6b35;
-    -fx-border-color: #ff8f00;
-}
-
-/* Hide redundant collapsed toggle */
-.scene-constructor-collapsed-toggle {
-    -fx-opacity: 0;
-    -fx-max-width: 0;
-    -fx-pref-width: 0;
-}
-
-/* Clean up scene constructor header */
-.enhanced-scene-constructor-header {
-    -fx-background-color: #2a2a2a;
-    -fx-border-color: rgba(255, 255, 255, 0.1);
-    -fx-border-width: 0 0 1 0;
-    -fx-padding: 8 12;
-    -fx-alignment: center-left;
-}
-
-.scene-constructor-title {
-    -fx-text-fill: #ffffff;
-    -fx-font-weight: 600;
+/* Scene constructor additional styles */
+.modern-scene-title {
     -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #ffffff;
+}
+
+.modern-scene-info-panel {
+    -fx-background-color: #1e1e1e;
+    -fx-border-color: rgba(255, 255, 255, 0.05);
+    -fx-border-width: 0 0 1 0;
+}
+
+.modern-scene-label {
+    -fx-font-size: 11px;
+    -fx-text-fill: #999999;
+    -fx-font-weight: 500;
+}
+
+.modern-panel-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 600;
+}
+
+.modern-panel-navigation {
+    -fx-background-color: #191919;
+}
+
+.modern-panel-count {
+    -fx-font-size: 11px;
+    -fx-text-fill: #cccccc;
+    -fx-font-weight: 500;
 }
